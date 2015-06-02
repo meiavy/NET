@@ -1,0 +1,99 @@
+---
+layout: post
+title: 零基础linux基础系列教程3-linux目录结构及导航
+categories:
+- linux使用
+- 教程
+- 未分类
+tags:
+- linux，linux教程，linux操作系统
+published: true
+comments: true
+---
+<p><h1>介绍</h1>
+在本节中，我们将学习在linux文件系统的目录中四处移动的基本知识。许多命令都需要引用文件系统中的文件或目录。是Linux中有效工作的基础。
+<h1>获取我们所在的当前目录</h1>
+我们要学的第一个命令是pwd（Present Working Directory），它打印出当前工作目录。大部分linux命令的名字为一个描述他们功能的字或词的缩写，这使得它更容易被记住。现在尝试一下pwd:</p>
+
+<p><a href="http://www.itcsl.cn/wp-content/uploads/2014/06/pwd.gif"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="pwd" src="http://www.itcsl.cn/wp-content/uploads/2014/06/pwd_thumb.gif" alt="pwd" width="370" height="79" border="0" /></a></p>
+
+<p>可以看到我们当前正在“/root”目录下，很多命令都依赖于你的当前目录。利用这个命令可以查看当前目录是否在正确的位置。
+<h1>查看当前目录内容</h1>
+可以使用ls命令查看当前目录下的内容，我们测试一下：</p>
+
+<p><a href="http://www.itcsl.cn/wp-content/uploads/2014/06/ls.gif"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="ls" src="http://www.itcsl.cn/wp-content/uploads/2014/06/ls_thumb.gif" alt="ls" width="447" height="50" border="0" /></a></p>
+
+<p>pwd命令不带任何选项参数，ls命令拥有很多选项。我们已经不带任何参数运行了ls命令，它简单的列出了我们当前目录下的文件。下面是它的用法的一个概要：</p>
+
+<p>ls [选项] [位置]</p>
+
+<p>在上面的示例中，方括号（[]）表示的那些项是​​可选的，我们可以在有或没有它们时运行​​命令。可以使用几个不同的方式来演示运行ls，如：</p>
+
+<p><a href="http://www.itcsl.cn/wp-content/uploads/2014/06/ls1.gif"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="ls" src="http://www.itcsl.cn/wp-content/uploads/2014/06/ls_thumb1.gif" alt="ls" width="489" height="52" border="0" /></a></p>
+
+<p>不带任何参数选项，ls它简单列出了当前目录的文件。</p>
+
+<p><a href="http://www.itcsl.cn/wp-content/uploads/2014/06/ls-l.gif"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="ls-l" src="http://www.itcsl.cn/wp-content/uploads/2014/06/ls-l_thumb.gif" alt="ls-l" width="491" height="129" border="0" /></a>
+用一个命令行选项（-l），表明我们要做一个长列表。长列表有以下几个特点：</p>
+
+<p>-rw-r--r-- 1 root root    94 6月   3 13:59 log<br />
+drwxr-xr-x 3 root root  4096 5月  19 11:11 works</p>
+
+<p>第一个字符表示它是否是一个正常的文件（ - ）或目录（d）<br />
+接下来9个字符是文件或目录的权限（我们将在后面学习），这里是rw-r--r-- 。<br />
+下一个是文件所占块的数量，这里是1。<br />
+下一个字段是文件或目录的所有者，这里是root用户。<br />
+下一个字段是文件或目录所属的组，这里是root组。<br />
+下一个字段是文件大小，如94。<br />
+接下来是文件的修改时间，如6月。<br />
+最后是文件或目录的实际名称，如log。</p>
+
+<p><a href="http://www.itcsl.cn/wp-content/uploads/2014/06/lsetc.gif"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="lsetc" src="http://www.itcsl.cn/wp-content/uploads/2014/06/lsetc_thumb.gif" alt="lsetc" width="491" height="139" border="0" /></a>
+用命令行参数（/ etc）运行ls。告诉ls不是列出我们的当前目录，而是列出/etc目录的内容，他给出了/etc目录的简单列表。</p>
+
+<p><a href="http://www.itcsl.cn/wp-content/uploads/2014/06/ls-letc.gif"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="ls-letc" src="http://www.itcsl.cn/wp-content/uploads/2014/06/ls-letc_thumb.gif" alt="ls-letc" width="495" height="97" border="0" /></a>
+我们运行了ls,同时使用了-l选项和/etc参数。因此他给出了/etc目录的长列表。</p>
+
+<p>&nbsp;
+<h1>路径（Path）</h1>
+在前面的命令中，我们已经开始触及到目录这个词。在某个命令中，每当我们提到文件或目录，我们实际上指的是路径。一个路径是到达系统上的特定文件或目录的方法。
+<h1>绝对路径和相对路径</h1>
+我们可以使用2种类型的路径，绝对路径和相对路径。</p>
+
+<p>首先，我们要明白，linux下的文件系统是一个树状的层次结构。在结构的最顶端是所谓的根目录。它被表示为一个单一的斜杠（/）。它有子目录，子目录又拥有子目录。目录中又包含文件。</p>
+
+<p>绝对路径是文件或目录相对于根目录的位置。你可以很容易地识别他们，因为他们总是以一个/开始。</p>
+
+<p>相对路径是相对于某个目录的一个路径。他们不会以斜线开始。</p>
+
+<p>下面以一个例子来说明：</p>
+
+<p><a href="http://www.itcsl.cn/wp-content/uploads/2014/06/path1.gif"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="path1" src="http://www.itcsl.cn/wp-content/uploads/2014/06/path1_thumb.gif" alt="path1" width="323" height="76" border="0" /></a></p>
+
+<p>我们运行pwd只是为了查看我们的当前目录。</p>
+
+<p><a href="http://www.itcsl.cn/wp-content/uploads/2014/06/path2.gif"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="path2" src="http://www.itcsl.cn/wp-content/uploads/2014/06/path2_thumb.gif" alt="path2" width="427" height="64" border="0" /></a></p>
+
+<p>我们使用了相对路径works运行了ll命令（redhat 上 ll=ls -l），该命令列出我们当前目录（/root）下的works目录中的文件或目录。如果我们的当前目录变化了，有可能就找不到works目录了。</p>
+
+<p><a href="http://www.itcsl.cn/wp-content/uploads/2014/06/path3.gif"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="path3" src="http://www.itcsl.cn/wp-content/uploads/2014/06/path3_thumb.gif" alt="path3" width="491" height="74" border="0" /></a>
+我们使用绝对路径/root/works运行了ll命令。该命令的输出与上一个一样，无论我们当前目录在哪，我们使用绝对路径运行ll命令都可以得到相同的结果。
+<h1>几个特殊的路径</h1>
+&nbsp;</p>
+
+<p>~（波浪号） - 这代表你的主目录。例如，如果你的主目录是/ home/zyy/，那么/ home /zyy/ 与~/表示的是一个含义。<br />
+. （点） 这代表你的当前目录。<br />
+..（两个点） 这代表父目录，您可以在一个路径中使用多次，代表持续向上的层次结构。例如，如果你当前路径为/ home/zyy, ../../则表示/目录。<br />
+在命令行上打关于这些自己后，他们将开始做一点更有意义。请确保您了解如何构建的所有路径的工作，你将使用所有的人在未来部分这些元素。
+<h1>切换当前目录</h1>
+可以使用cd命令改变当前目录。命令格式如下：</p>
+
+<p>cd [位置]</p>
+
+<p>如果你不带任何参数运行命令cd，它会永远把你带​​回你的home目录。</p>
+
+<p>我们可以使用绝对路径、相对路径、特殊路径作为cd命令的参数，如下：</p>
+
+<p>&nbsp;</p>
+
+<p><a href="http://www.itcsl.cn/wp-content/uploads/2014/06/cd.gif"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border: 0px;" title="cd" src="http://www.itcsl.cn/wp-content/uploads/2014/06/cd_thumb.gif" alt="cd" width="276" height="300" border="0" /></a></p>

@@ -1,0 +1,235 @@
+---
+layout: post
+title: 零基础linux基础系列教程9-Linux权限管理
+categories:
+- linux使用
+- 技术
+- 教程
+tags:
+- linux，linux教程，linux操作系统
+published: true
+comments: true
+---
+<p><h1><b>Linux权限管理</b></h1>
+Linux通过权限管理限制一个文件或目录谁可以访问，谁不可以访问.对于创建一个安全的环境，权限是非常重要的。例如你不希望其他人去修改你的私人文件，系统文件也要防止任意的修改。
+<h1><b>什么是权限</b></h1>
+权限规定了用户对文件进行操作的3个方面,读（read）, 写（write） 、执行（ execute）.分别可以通过3个字符进行表示：
+<ul>
+	<li><b> </b><b>r </b>read - 你可以查看文件的内容。</li>
+	<li><b> </b><b>w </b>write - 你可以修改这个文件的内容。</li>
+	<li><b> </b><b>x </b>execute - 如果是一个程序或者脚本，你可以运行这个文件。</li>
+</ul>
+每个文件我们定义了3种用户，拥有者用户、组用户、其它用户。
+<ul>
+	<li><b> </b><b>owner</b>- 拥有者，定义谁拥有这个文件，一般是创建这个文件的用户，可以通过命令改变文件的拥有者。</li>
+	<li><b> </b><b>group</b>- 每个文件属于一个用户组。</li>
+	<li><b> </b><b>others</b>- 除了拥有者、组用户以外的其它用户。</li>
+</ul>
+通过定义文件的3种用户以及每种用户所拥有的权限，限制用户对文件的读、写、执行，这就是权限管理的内容。
+<h1><b>查看</b><b>权限</b></h1>
+可以通过如下命令查看文件的权限：</p>
+
+<p>ls -l [path]</p>
+
+<p>如：</p>
+
+<p>[root@pidora ~]# ls -l /home/ryan/linuxtutorialwork/frog.png</p>
+
+<p>-rwxr----x 1 harry users 2.7K Jan 4 07:32 /home/ryan/linuxtutorialwork/frog.png</p>
+
+<p>&nbsp;</p>
+
+<p>上面命令的输出中的前面10个字符就是该文件的权限：
+<ul>
+	<li> 第一个字符表示文件的类型，( - ) 代表普通的文件，d 代表一个目录。</li>
+	<li> 接下来的3个字符表示拥有者的权限. 一个字符表示拥有相应的权限，一个（-）字符表示不拥有相应的权限。上面的例子中表示拥有者拥有读（r），写（w），执行（x）权限。</li>
+	<li> 接下来3个字符表示文件所属用户组的权限，上面的例子中用户组只有读的权限，注意权限信息的输出顺序总是rwx。</li>
+	<li> 最后的3个字符表示除拥有者、用户组之外的其他用户的权限，上面的例子中可以看出只有执行的权限。</li>
+</ul>
+<h1><b>修改权限</b></h1>
+可以通过 <b>chmod</b><b>（</b> change file mode <b>）</b> 对文件的权限进行修改：</p>
+
+<p>chmod [权限定义] [文件路径]</p>
+
+<p><b>chmod</b> 的权限定义参数通过如下方式指定，有3个部分组成：
+<ul>
+	<li> 我们针对哪类用户修改权限? - 拥有者（owner）, 组用户（group）, 其他人（others), 所有用户？</li>
+	<li> 我们是增加还是减少某个权限，通过 ( + ) or  ( - )</li>
+	<li> 我们修改哪个权限? - 读 ( r ), 写 ( w ) 还是执行 ( x )</li>
+</ul>
+看几个例子：</p>
+
+<p>组用户增加执行权限，然后移除拥有者用户的写权限：</p>
+
+<p>[root@pidora ~]# ls -l frog.png</p>
+
+<p>-rwxr----x 1 harry users 2.7K Jan 4 07:32 frog.png</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# chmod g+x frog.png</p>
+
+<p>[root@pidora ~]# ls -l frog.png</p>
+
+<p>-rwxr-x--x 1 harry users 2.7K Jan 4 07:32 frog.png</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# chmod u-w frog.png</p>
+
+<p>[root@pidora ~]# ls -l frog.png</p>
+
+<p>-r-xr-x--x 1 harry users 2.7K Jan 4 07:32 frog.png</p>
+
+<p>&nbsp;</p>
+
+<p>我们可以一次针对多个用户、修改多个权限：</p>
+
+<p>[root@pidora ~]# ls -l frog.png</p>
+
+<p>-rwxr----x 1 harry users 2.7K Jan 4 07:32 frog.png</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# chmod g+wx frog.png</p>
+
+<p>[root@pidora ~]# ls -l frog.png</p>
+
+<p>-rwxrwx--x 1 harry users 2.7K Jan 4 07:32 frog.png</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# chmod go-x frog.png</p>
+
+<p>[root@pidora ~]# ls -l frog.png</p>
+
+<p>-rwxrw---- 1 harry users 2.7K Jan 4 07:32 frog.png</p>
+
+<p>&nbsp;</p>
+
+<p>文件拥有者移除自己对文件的读写执行权限看起来似乎有一点奇怪，但有时我们有充分的理由这样做， 也许有一个文件我们不希望其内容被意外的改变，我们可以移除我们对该文件的修改权限，一致我们不能修改这个文件。但因为我们是该文件的拥有者，我们仍然保留了对该文件的控制。
+<h1><b>通过数字设置权限</b></h1>
+八进制数与二进制数的对应表
+<table>
+<tbody>
+<tr>
+<td width="46"><b>Octal</b></td>
+<td width="54"><b>Binary</b></td>
+</tr>
+<tr>
+<td width="46">0</td>
+<td width="54">0 0 0</td>
+</tr>
+<tr>
+<td width="46">1</td>
+<td width="54">0 0 1</td>
+</tr>
+<tr>
+<td width="46">2</td>
+<td width="54">0 1 0</td>
+</tr>
+<tr>
+<td width="46">3</td>
+<td width="54">0 1 1</td>
+</tr>
+<tr>
+<td width="46">4</td>
+<td width="54">1 0 0</td>
+</tr>
+<tr>
+<td width="46">5</td>
+<td width="54">1 0 1</td>
+</tr>
+<tr>
+<td width="46">6</td>
+<td width="54">1 1 0</td>
+</tr>
+<tr>
+<td width="46">7</td>
+<td width="54">1 1 1</td>
+</tr>
+</tbody>
+</table>
+&nbsp;</p>
+
+<p>通过上表我们可以看出，每个8进制的数可以通过3个二进制位进行表示。如果把每个二进制位与3种权限对应起来，二进制的1代表拥有这个权限，二进制的0代表没有这个权限，然后，通过一个8进制的数值我们可以表示某种用户对某个文件的权限。看几个例子：</p>
+
+<p>[root@pidora ~]#ls -l frog.png</p>
+
+<p>-rw-r----x 1 harry users 2.7K Jan 4 07:32 frog.png</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]#chmod 751 frog.png</p>
+
+<p>[root@pidora ~]#ls -l frog.png</p>
+
+<p>-rwxr-x--x 1 harry users 2.7K Jan 4 07:32 frog.png</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]#chmod 240 frog.png</p>
+
+<p>[root@pidora ~]#ls -l frog.png</p>
+
+<p>--w-r----- 1 harry users 2.7K Jan 4 07:32 frog.png</p>
+
+<p>&nbsp;
+<h1><b>目录的权限</b></h1>
+目录同样拥有读、写、执行的权限，但行为稍微有点不同：
+<ul>
+	<li><b> </b><b>r</b>- 读权限表示你可以读取这个目录的内容，譬如ls命令列表目录下的文件</li>
+	<li><b> </b><b>w</b>- 写权限代表你可以修改这个目录，譬如创建新的文件和子目录。删除文件和子目录等。</li>
+	<li><b> </b><b>x</b>- 执行权限代表你可以进入这个目录，譬如cd命令。</li>
+</ul>
+下面是一些例子：</p>
+
+<p>[root@pidora ~]#ls testdir</p>
+
+<p>file1 file2 file3</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]#chmod 400 testdir</p>
+
+<p>[root@pidora ~]#ls -ld testdir</p>
+
+<p>-r-------- 1 ryan users 2.7K Jan 4 07:32 testdir</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]#cd testdir</p>
+
+<p>cd: testdir: Permission denied</p>
+
+<p>[root@pidora ~]#ls testdir</p>
+
+<p>file1 file2 file3</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]#chmod 100 testdir</p>
+
+<p>[root@pidora ~]#ls -ld testdir</p>
+
+<p>---x------ 1 ryan users 2.7K Jan 4 07:32 testdir</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]#ls testdir</p>
+
+<p>ls: cannot open directory testdir/: Permission denied</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]#cd testdir</p>
+
+<p>&nbsp;</p>
+
+<p>注意，当ls命令使用-d选项时，我们列表目录入口。一般情况下没有-d选项时列表目录内容。
+<h1><b>Linux root 用户</b></h1>
+Linux只有两个用户可以改变文件或目录的权限，即文件或目录的拥有者即root用户。root是一个可以在系统中做任何事情的超级用户。系统管理员是一个典型的root用户。一般情况下，普通用户只能够访问在他们的home目录下的文件或目录及少数为共享或协作目的的目录。这大大提高了整个系统的安全性。
+<h1><b>基本安全</b></h1>
+home目录时你的个人数据保存区域，大多数用户将会给他们自己home目录的完整读、写、执行权限。不给其他人自己home目录的权限。</p>
+
+<p>为了保证安全，一般情况下不要给除自己外的其他用户（包括组用户、others用户）对自己home目录的写权限，给某个用户对目录的执行权限但不给读权限，可以让该用户可以进入目录，但不能查看目录下的内容。通常在web服务器上使用的比较多。</p>

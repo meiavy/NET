@@ -1,0 +1,112 @@
+---
+layout: post
+title: 零基础linux基础系列教程4-linux文件
+categories:
+- linux使用
+- 教程
+tags:
+- linux，linux教程，linux操作系统
+published: true
+comments: true
+---
+<p><h1>零基础linux基础系列教程4-linux文件</h1>
+<h2><b>Linux文件</b></h2>
+在上一节之后我想你希望学更多一点的命令，并开始做一些有用的事情。我们一定会达到这个目标，但首先我们需要了解一些Linux文件的理论，以便我们进一步学习。我们需要理解的是在 linux 中，一切都是一个Linux文件。文本文件是一个Linux文件，目录是一个Linux文件，你的键盘是一个Linux文件，您的显示器也是一个Linux文件等。记住这一点，当我们管理Linux的文件和目录时，它有助于我们理解 Linux 的行为。
+<h2><b>Linux文件扩展名</b></h2>
+在windows中，文件扩展名通常是指文件名末尾的以点分隔的字符串，它告诉人们这个文件是什么类型，如以下常见的扩展名：</p>
+
+<p>file.exe-一种可执行文件或程序。</p>
+
+<p>file.txt-纯文本的文件。</p>
+
+<p>file.png、 file.gif、 file.jpg-图像。</p>
+
+<p>在windows中，扩展名是重要的，windows操作系统使用它来决定该文件是什么类型。但是在Linux 下，操作系统忽略Linux文件的扩展名，Linux操作系统不依赖Linux文件扩展名来决定文件的类型，它实际上是通过查看Linux文件的内容，以确定这个Linux文件是哪种类型。所以我可以有一个文件名为myself.png的Linux文件保存了我的照片。我可以将该Linux文件重命名为 myself.txt 或者myself。Linux 仍然会将该文件当作一个图像文件来处理。有时我们很难直观的通过Linux文件名来确定该文件到底是一个什么文件，幸运的是Linux由一个命令file，通过该命令我们可以得出某个Linux文件的文件类型。命令的使用方法如下：</p>
+
+<p>[root@pidora ~]#file [文件或目录的路径]</p>
+
+<p>我们可以在file命令的参数中指定Linux文件或目录的路径。上一节我们说过，目录其实也是一个特殊的Linux文件。
+<h2><b>Linux 是区分大小写的</b></h2>
+Linux初学者通常会犯大小写的错误。指定Linux文件路径的时候，其他系统 （如 Windows ）是大小写不敏感的。Linux 并不是这样。所以Linux在同一个路径下可以有两个或多个Linux文件和目录具有相同的名称但字母大小写不同。如：</p>
+
+<p>[root@pidora test]# ll</p>
+
+<p>total 0</p>
+
+<p>-rw-r--r-- 1 root root 0 6月  14 17:20 aaa.txt</p>
+
+<p>-rw-r--r-- 1 root root 0 6月  14 17:20 Aaa.txt</p>
+
+<p>在输入命令行选项时，也要注意区分大小写。例如命令 ls 有两个选项 ，s 和 S。 这两个选项是不同的，由不同的功能。一个常见的错误是把需要大写的选项写成小写的了。然后一直寻找为什么结果不符合你的期望，
+<h2><b>Linux文件名称中的空格</b></h2>
+Linux文件和目录的名称中可以包含空格。但我们需要十分的小心。在Linux的命令行上，空格是我们分开各个选项的分隔符。如果提供的Linux文件或目录参数中包含空格，命令可能出错,如：</p>
+
+<p>[root@pidora test]# ll</p>
+
+<p>total 4</p>
+
+<p>-rw-r--r-- 1 root root    0 6月  14 17:20 aaa.txt</p>
+
+<p>-rw-r--r-- 1 root root    0 6月  14 17:20 Aaa.txt</p>
+
+<p>drwxr-xr-x 2 root root 4096 6月  14 17:28 Photo Root</p>
+
+<p>[root@pidora test]# cd Photo Root</p>
+
+<p>-bash: cd: Photo: No such file or directory</p>
+
+<p>明明目录中包含Photo Root的文件夹，问什么cd命令会报没有找到该目录的错误呢。这是因为目录名称中包含了空格，Photo与Root被看作成两个命令行参数。可以有两种方式解决这个问题。
+<h3><b>使用引号</b></h3>
+你可以使用引号把整个Linux文件名称括起来。你可以使用单引号或双引号（稍后我们会说两者之间的区别）。引号内的任何东西被认为是一个单一的项。如：</p>
+
+<p>[root@pidora test]# ll</p>
+
+<p>total 4</p>
+
+<p>-rw-r--r-- 1 root root    0 6月  14 17:20 aaa.txt</p>
+
+<p>-rw-r--r-- 1 root root    0 6月  14 17:20 Aaa.txt</p>
+
+<p>drwxr-xr-x 2 root root 4096 6月  14 17:28 Photo Root</p>
+
+<p>[root@pidora test]# cd "Photo Root"</p>
+
+<p>[root@pidora Photo Root]#
+<h3><b>使用转义字符</b></h3>
+你也可以使用所谓的转义字符，它是一个反斜杠 (\)。反斜杠转义 （或取消） 下一个字符的特殊含义。如：</p>
+
+<p>[root@pidora test]# ll</p>
+
+<p>total 4</p>
+
+<p>-rw-r--r-- 1 root root    0 6月  14 17:20 aaa.txt</p>
+
+<p>-rw-r--r-- 1 root root    0 6月  14 17:20 Aaa.txt</p>
+
+<p>drwxr-xr-x 2 root root 4096 6月  14 17:28 Photo Root</p>
+
+<p>[root@pidora test]# cd Photo\ Root</p>
+
+<p>[root@pidora Photo Root]#</p>
+
+<p>上面的例子中在空格前添加了转义字符，所有该空格不再被命令行当作参数分隔符。
+<h2><b>隐藏的Linux文件和目录</b></h2>
+Linux 实际上有一个非常简单和优雅的机制，用于指定Linux文件或目录隐藏。所有以（.）开头的Linux文件或目录。都被Linux认为是隐藏的。你不需要特殊的命令或操作使Linux文件或目录隐藏。你只需要修改它们的名字以.开始即可。</p>
+
+<p>同样你可以重命名一个隐藏的Linux文件，去掉点来取消隐藏。Linux命令 ls 默认不会列出隐藏的Linux文件和目录。我们可以通过增加命令行选项-a，以便它显示隐藏的Linux文件和目录。每个目录都有两个隐藏的文件，如：</p>
+
+<p>[root@pidora test]# ls -l -a</p>
+
+<p>total 12</p>
+
+<p>drwxr-xr-x 3 root root 4096 6月  14 17:28 .</p>
+
+<p>dr-xr-x--- 9 root root 4096 6月  14 17:20 ..</p>
+
+<p>-rw-r--r-- 1 root root    0 6月  14 17:20 aaa.txt</p>
+
+<p>-rw-r--r-- 1 root root    0 6月  14 17:20 Aaa.txt</p>
+
+<p>drwxr-xr-x 2 root root 4096 6月  14 17:28 Photo Root</p>
+
+<p>在上面的示例中，你可以看到我们使用-a参数列出隐藏Linux文件（.和..）。即当前目录和父目录。</p>

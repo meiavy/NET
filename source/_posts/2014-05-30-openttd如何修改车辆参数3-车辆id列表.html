@@ -1,0 +1,1404 @@
+---
+layout: post
+title: OpenTTD如何修改车辆参数3-车辆ID列表
+categories:
+- 教程
+- 游戏
+tags:
+- NewGRF
+- openttd
+- 补丁
+- 车辆修改
+- 车辆属性
+published: true
+comments: true
+---
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="OpenTTD如何修改车辆参数1-工具" href="http://www.itcsl.cn/2014/05/27/openttd%e5%a6%82%e4%bd%95%e4%bf%ae%e6%94%b9%e8%bd%a6%e8%be%86%e5%8f%82%e6%95%b0-1/">OpenTTD如何修改车辆参数1-工具</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="OpenTTD如何修改车辆参数2-nfo文件格式" href="http://www.itcsl.cn/2014/05/30/openttd%e5%a6%82%e4%bd%95%e4%bf%ae%e6%94%b9%e8%bd%a6%e8%be%86%e5%8f%82%e6%95%b02-nfo%e6%96%87%e4%bb%b6%e6%a0%bc%e5%bc%8f/">OpenTTD如何修改车辆参数2-nfo文件格式</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="OpenTTD如何修改车辆参数3-车辆ID列表" href="http://www.itcsl.cn/2014/05/30/openttd%e5%a6%82%e4%bd%95%e4%bf%ae%e6%94%b9%e8%bd%a6%e8%be%86%e5%8f%82%e6%95%b03-%e8%bd%a6%e8%be%86id%e5%88%97%e8%a1%a8/">OpenTTD如何修改车辆参数3-车辆ID列表</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="OpenTTD如何修改车辆参数4-车辆属性列表" href="http://www.itcsl.cn/2014/05/30/openttd%e5%a6%82%e4%bd%95%e4%bf%ae%e6%94%b9%e8%bd%a6%e8%be%86%e5%8f%82%e6%95%b0/">OpenTTD如何修改车辆参数4-车辆属性列表</a></span></p>
+
+<p>&nbsp;
+<table width="791"><colgroup> <col width="144" /> <col width="72" /> <col width="575" /> </colgroup>
+<tbody>
+<tr>
+<td class="et2" colspan="3" width="360" height="44">火车引擎</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">0</td>
+<td class="et5" width="72" height="19">0</td>
+<td class="et4" width="575" height="19">Kirby Paul Tank (Steam)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">1</td>
+<td class="et5" width="72" height="19">1</td>
+<td class="et4" width="575" height="19">MJS 250 (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">2</td>
+<td class="et5" width="72" height="19">2</td>
+<td class="et4" width="575" height="19">Ploddyphut Choo-Choo</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">3</td>
+<td class="et5" width="72" height="19">3</td>
+<td class="et4" width="575" height="19">Powernaut Choo-Choo</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">4</td>
+<td class="et5" width="72" height="19">4</td>
+<td class="et4" width="575" height="19">Mightymover Choo-Choo</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">5</td>
+<td class="et5" width="72" height="19">5</td>
+<td class="et4" width="575" height="19">Ploddyphut Diesel</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">6</td>
+<td class="et5" width="72" height="19">6</td>
+<td class="et4" width="575" height="19">Powernaut Diesel</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">7</td>
+<td class="et5" width="72" height="19">7</td>
+<td class="et4" width="575" height="19">Wills 2-8-0 (Steam)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">8</td>
+<td class="et5" width="72" height="19">8</td>
+<td class="et4" width="575" height="19">Chaney 'Jubilee' (Steam)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">9</td>
+<td class="et5" width="72" height="19">9</td>
+<td class="et4" width="575" height="19">Ginzu 'A4' (Steam)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">10</td>
+<td class="et5" width="72" height="19">0A</td>
+<td class="et4" width="575" height="19">SH '8P' (Steam)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">11</td>
+<td class="et5" width="72" height="19">0B</td>
+<td class="et4" width="575" height="19">Manley-Morel DMU (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">12</td>
+<td class="et5" width="72" height="19">0C</td>
+<td class="et4" width="575" height="19">'Dash' (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">13</td>
+<td class="et5" width="72" height="19">0D</td>
+<td class="et4" width="575" height="19">SH/Hendry '25' (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">14</td>
+<td class="et5" width="72" height="19">0E</td>
+<td class="et4" width="575" height="19">UU '37' (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">15</td>
+<td class="et5" width="72" height="19">0F</td>
+<td class="et4" width="575" height="19">Floss '47' (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">16</td>
+<td class="et5" width="72" height="19">10</td>
+<td class="et4" width="575" height="19">CS 4000 (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">17</td>
+<td class="et5" width="72" height="19">11</td>
+<td class="et4" width="575" height="19">CS 2400 (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">18</td>
+<td class="et5" width="72" height="19">12</td>
+<td class="et4" width="575" height="19">Centennial (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">19</td>
+<td class="et5" width="72" height="19">13</td>
+<td class="et4" width="575" height="19">Kelling 3100 (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">20</td>
+<td class="et5" width="72" height="19">14</td>
+<td class="et4" width="575" height="19">Turner Turbo (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">21</td>
+<td class="et5" width="72" height="19">15</td>
+<td class="et4" width="575" height="19">MJS 1000 (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">22</td>
+<td class="et5" width="72" height="19">16</td>
+<td class="et4" width="575" height="19">SH '125' (Diesel)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">23</td>
+<td class="et5" width="72" height="19">17</td>
+<td class="et4" width="575" height="19">SH '30' (Electric)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">24</td>
+<td class="et5" width="72" height="19">18</td>
+<td class="et4" width="575" height="19">SH '40' (Electric)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">25</td>
+<td class="et5" width="72" height="19">19</td>
+<td class="et4" width="575" height="19">'T.I.M.' (Electric)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">26</td>
+<td class="et5" width="72" height="19">1A</td>
+<td class="et4" width="575" height="19">'AsiaStar' (Electric)</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">火车车厢</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">27</td>
+<td class="et5" width="72" height="19">1B</td>
+<td class="et4" width="575" height="19">Passenger Carriage</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">28</td>
+<td class="et5" width="72" height="19">1C</td>
+<td class="et4" width="575" height="19">Mail Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">29</td>
+<td class="et5" width="72" height="19">1D</td>
+<td class="et4" width="575" height="19">Coal Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">30</td>
+<td class="et5" width="72" height="19">1E</td>
+<td class="et4" width="575" height="19">Oil Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">31</td>
+<td class="et5" width="72" height="19">1F</td>
+<td class="et4" width="575" height="19">Livestock Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">32</td>
+<td class="et5" width="72" height="19">20</td>
+<td class="et4" width="575" height="19">Goods Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">33</td>
+<td class="et5" width="72" height="19">21</td>
+<td class="et4" width="575" height="19">Grain Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">34</td>
+<td class="et5" width="72" height="19">22</td>
+<td class="et4" width="575" height="19">Wood Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">35</td>
+<td class="et5" width="72" height="19">23</td>
+<td class="et4" width="575" height="19">Iron Ore Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">36</td>
+<td class="et5" width="72" height="19">24</td>
+<td class="et4" width="575" height="19">Steel Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">37</td>
+<td class="et5" width="72" height="19">25</td>
+<td class="et4" width="575" height="19">Armoured Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">38</td>
+<td class="et5" width="72" height="19">26</td>
+<td class="et4" width="575" height="19">Food Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">39</td>
+<td class="et5" width="72" height="19">27</td>
+<td class="et4" width="575" height="19">Paper Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">40</td>
+<td class="et5" width="72" height="19">28</td>
+<td class="et4" width="575" height="19">Copper Ore Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">41</td>
+<td class="et5" width="72" height="19">29</td>
+<td class="et4" width="575" height="19">Water Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">42</td>
+<td class="et5" width="72" height="19">2A</td>
+<td class="et4" width="575" height="19">Fruit Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">43</td>
+<td class="et5" width="72" height="19">2B</td>
+<td class="et4" width="575" height="19">Rubber Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">44</td>
+<td class="et5" width="72" height="19">2C</td>
+<td class="et4" width="575" height="19">Sugar Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">45</td>
+<td class="et5" width="72" height="19">2D</td>
+<td class="et4" width="575" height="19">Candyfloss Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">46</td>
+<td class="et5" width="72" height="19">2E</td>
+<td class="et4" width="575" height="19">Toffee Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">47</td>
+<td class="et5" width="72" height="19">2F</td>
+<td class="et4" width="575" height="19">Bubble Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">48</td>
+<td class="et5" width="72" height="19">30</td>
+<td class="et4" width="575" height="19">Cola Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">49</td>
+<td class="et5" width="72" height="19">31</td>
+<td class="et4" width="575" height="19">Sweet Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">50</td>
+<td class="et5" width="72" height="19">32</td>
+<td class="et4" width="575" height="19">Toy Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">51</td>
+<td class="et5" width="72" height="19">33</td>
+<td class="et4" width="575" height="19">Battery Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">52</td>
+<td class="et5" width="72" height="19">34</td>
+<td class="et4" width="575" height="19">Fizzy Drink Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">53</td>
+<td class="et5" width="72" height="19">35</td>
+<td class="et4" width="575" height="19">Plastic Truck</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">单轨火车引擎</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">54</td>
+<td class="et5" width="72" height="19">36</td>
+<td class="et4" width="575" height="19">'X2001' (Electric)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">55</td>
+<td class="et5" width="72" height="19">37</td>
+<td class="et4" width="575" height="19">'Millennium Z1' (Electric)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">56</td>
+<td class="et5" width="72" height="19">38</td>
+<td class="et4" width="575" height="19">Wizzowow Z99</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">单轨火车车厢</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">57</td>
+<td class="et5" width="72" height="19">39</td>
+<td class="et4" width="575" height="19">Passenger Carriage</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">58</td>
+<td class="et5" width="72" height="19">3A</td>
+<td class="et4" width="575" height="19">Mail Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">59</td>
+<td class="et5" width="72" height="19">3B</td>
+<td class="et4" width="575" height="19">Coal Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">60</td>
+<td class="et5" width="72" height="19">3C</td>
+<td class="et4" width="575" height="19">Oil Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">61</td>
+<td class="et5" width="72" height="19">3D</td>
+<td class="et4" width="575" height="19">Livestock Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">62</td>
+<td class="et5" width="72" height="19">3E</td>
+<td class="et4" width="575" height="19">Goods Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">63</td>
+<td class="et5" width="72" height="19">3F</td>
+<td class="et4" width="575" height="19">Grain Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">64</td>
+<td class="et5" width="72" height="19">40</td>
+<td class="et4" width="575" height="19">Wood Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">65</td>
+<td class="et5" width="72" height="19">41</td>
+<td class="et4" width="575" height="19">Iron Ore Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">66</td>
+<td class="et5" width="72" height="19">42</td>
+<td class="et4" width="575" height="19">Steel Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">67</td>
+<td class="et5" width="72" height="19">43</td>
+<td class="et4" width="575" height="19">Armoured Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">68</td>
+<td class="et5" width="72" height="19">44</td>
+<td class="et4" width="575" height="19">Food Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">69</td>
+<td class="et5" width="72" height="19">45</td>
+<td class="et4" width="575" height="19">Paper Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">70</td>
+<td class="et5" width="72" height="19">46</td>
+<td class="et4" width="575" height="19">Copper Ore Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">71</td>
+<td class="et5" width="72" height="19">47</td>
+<td class="et4" width="575" height="19">Water Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">72</td>
+<td class="et5" width="72" height="19">48</td>
+<td class="et4" width="575" height="19">Fruit Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">73</td>
+<td class="et5" width="72" height="19">49</td>
+<td class="et4" width="575" height="19">Rubber Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">74</td>
+<td class="et5" width="72" height="19">4A</td>
+<td class="et4" width="575" height="19">Sugar Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">75</td>
+<td class="et5" width="72" height="19">4B</td>
+<td class="et4" width="575" height="19">Candyfloss Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">76</td>
+<td class="et5" width="72" height="19">4C</td>
+<td class="et4" width="575" height="19">Toffee Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">77</td>
+<td class="et5" width="72" height="19">4D</td>
+<td class="et4" width="575" height="19">Bubble Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">78</td>
+<td class="et5" width="72" height="19">4E</td>
+<td class="et4" width="575" height="19">Cola Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">79</td>
+<td class="et5" width="72" height="19">4F</td>
+<td class="et4" width="575" height="19">Sweet Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">80</td>
+<td class="et5" width="72" height="19">50</td>
+<td class="et4" width="575" height="19">Toy Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">81</td>
+<td class="et5" width="72" height="19">51</td>
+<td class="et4" width="575" height="19">Battery Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">82</td>
+<td class="et5" width="72" height="19">52</td>
+<td class="et4" width="575" height="19">Fizzy Drink Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">83</td>
+<td class="et5" width="72" height="19">53</td>
+<td class="et4" width="575" height="19">Plastic Truck</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">磁悬浮引擎</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">84</td>
+<td class="et5" width="72" height="19">54</td>
+<td class="et4" width="575" height="19">Lev1 'Leviathan' (Electric)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">85</td>
+<td class="et5" width="72" height="19">55</td>
+<td class="et4" width="575" height="19">Lev2 'Cyclops' (Electric)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">86</td>
+<td class="et5" width="72" height="19">56</td>
+<td class="et4" width="575" height="19">Lev3 'Pegasus' (Electric)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">87</td>
+<td class="et5" width="72" height="19">57</td>
+<td class="et4" width="575" height="19">Lev4 'Chimaera' (Electric)</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">88</td>
+<td class="et5" width="72" height="19">58</td>
+<td class="et4" width="575" height="19">Wizzowow Rocketeer</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">磁悬浮车厢</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">89</td>
+<td class="et5" width="72" height="19">59</td>
+<td class="et4" width="575" height="19">Passenger Carriage</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">90</td>
+<td class="et5" width="72" height="19">5A</td>
+<td class="et4" width="575" height="19">Mail Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">91</td>
+<td class="et5" width="72" height="19">5B</td>
+<td class="et4" width="575" height="19">Coal Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">92</td>
+<td class="et5" width="72" height="19">5C</td>
+<td class="et4" width="575" height="19">Oil Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">93</td>
+<td class="et5" width="72" height="19">5D</td>
+<td class="et4" width="575" height="19">Livestock Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">94</td>
+<td class="et5" width="72" height="19">5E</td>
+<td class="et4" width="575" height="19">Goods Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">95</td>
+<td class="et5" width="72" height="19">5F</td>
+<td class="et4" width="575" height="19">Grain Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">96</td>
+<td class="et5" width="72" height="19">60</td>
+<td class="et4" width="575" height="19">Wood Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">97</td>
+<td class="et5" width="72" height="19">61</td>
+<td class="et4" width="575" height="19">Iron Ore Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">98</td>
+<td class="et5" width="72" height="19">62</td>
+<td class="et4" width="575" height="19">Steel Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">99</td>
+<td class="et5" width="72" height="19">63</td>
+<td class="et4" width="575" height="19">Armoured Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">100</td>
+<td class="et5" width="72" height="19">64</td>
+<td class="et4" width="575" height="19">Food Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">101</td>
+<td class="et5" width="72" height="19">65</td>
+<td class="et4" width="575" height="19">Paper Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">102</td>
+<td class="et5" width="72" height="19">66</td>
+<td class="et4" width="575" height="19">Copper Ore Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">103</td>
+<td class="et5" width="72" height="19">67</td>
+<td class="et4" width="575" height="19">Water Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">104</td>
+<td class="et5" width="72" height="19">68</td>
+<td class="et4" width="575" height="19">Fruit Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">105</td>
+<td class="et5" width="72" height="19">69</td>
+<td class="et4" width="575" height="19">Rubber Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">106</td>
+<td class="et5" width="72" height="19">6A</td>
+<td class="et4" width="575" height="19">Sugar Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">107</td>
+<td class="et5" width="72" height="19">6B</td>
+<td class="et4" width="575" height="19">Candyfloss Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">108</td>
+<td class="et5" width="72" height="19">6C</td>
+<td class="et4" width="575" height="19">Toffee Hopper</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">109</td>
+<td class="et5" width="72" height="19">6D</td>
+<td class="et4" width="575" height="19">Bubble Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">110</td>
+<td class="et5" width="72" height="19">6E</td>
+<td class="et4" width="575" height="19">Cola Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">111</td>
+<td class="et5" width="72" height="19">6F</td>
+<td class="et4" width="575" height="19">Sweet Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">112</td>
+<td class="et5" width="72" height="19">70</td>
+<td class="et4" width="575" height="19">Toy Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">113</td>
+<td class="et5" width="72" height="19">71</td>
+<td class="et4" width="575" height="19">Battery Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">114</td>
+<td class="et5" width="72" height="19">72</td>
+<td class="et4" width="575" height="19">Fizzy Drink Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">115</td>
+<td class="et5" width="72" height="19">73</td>
+<td class="et4" width="575" height="19">Plastic Truck</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">公交</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">116</td>
+<td class="et5" width="72" height="19">0</td>
+<td class="et4" width="575" height="19">MPS Regal Bus</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">117</td>
+<td class="et5" width="72" height="19">1</td>
+<td class="et4" width="575" height="19">Hereford Leopard Bus</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">118</td>
+<td class="et5" width="72" height="19">2</td>
+<td class="et4" width="575" height="19">Foster Bus</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">119</td>
+<td class="et5" width="72" height="19">3</td>
+<td class="et4" width="575" height="19">Foster MkII Superbus</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">120</td>
+<td class="et5" width="72" height="19">4</td>
+<td class="et4" width="575" height="19">Ploddyphut MkI Bus</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">121</td>
+<td class="et5" width="72" height="19">5</td>
+<td class="et4" width="575" height="19">Ploddyphut MkII Bus</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">122</td>
+<td class="et5" width="72" height="19">6</td>
+<td class="et4" width="575" height="19">Ploddyphut MkIII Bus</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">正常气候卡车</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">123</td>
+<td class="et5" width="72" height="19">7</td>
+<td class="et4" width="575" height="19">Balogh Coal Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">124</td>
+<td class="et5" width="72" height="19">8</td>
+<td class="et4" width="575" height="19">Uhl Coal Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">125</td>
+<td class="et5" width="72" height="19">9</td>
+<td class="et4" width="575" height="19">DW Coal Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">126</td>
+<td class="et5" width="72" height="19">0A</td>
+<td class="et4" width="575" height="19">MPS Mail Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">127</td>
+<td class="et5" width="72" height="19">0B</td>
+<td class="et4" width="575" height="19">Reynard Mail Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">128</td>
+<td class="et5" width="72" height="19">0C</td>
+<td class="et4" width="575" height="19">Perry Mail Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">129</td>
+<td class="et5" width="72" height="19">0D</td>
+<td class="et4" width="575" height="19">MightyMover Mail Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">130</td>
+<td class="et5" width="72" height="19">0E</td>
+<td class="et4" width="575" height="19">Powernaught Mail Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">131</td>
+<td class="et5" width="72" height="19">0F</td>
+<td class="et4" width="575" height="19">Wizzowow Mail Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">132</td>
+<td class="et5" width="72" height="19">10</td>
+<td class="et4" width="575" height="19">Witcombe Oil Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">133</td>
+<td class="et5" width="72" height="19">11</td>
+<td class="et4" width="575" height="19">Foster Oil Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">134</td>
+<td class="et5" width="72" height="19">12</td>
+<td class="et4" width="575" height="19">Perry Oil Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">135</td>
+<td class="et5" width="72" height="19">13</td>
+<td class="et4" width="575" height="19">Talbott Livestock Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">136</td>
+<td class="et5" width="72" height="19">14</td>
+<td class="et4" width="575" height="19">Uhl Livestock Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">137</td>
+<td class="et5" width="72" height="19">15</td>
+<td class="et4" width="575" height="19">Foster Livestock Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">138</td>
+<td class="et5" width="72" height="19">16</td>
+<td class="et4" width="575" height="19">Balogh Goods Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">139</td>
+<td class="et5" width="72" height="19">17</td>
+<td class="et4" width="575" height="19">Craighead Goods Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">140</td>
+<td class="et5" width="72" height="19">18</td>
+<td class="et4" width="575" height="19">Goss Goods Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">141</td>
+<td class="et5" width="72" height="19">19</td>
+<td class="et4" width="575" height="19">Hereford Grain Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">142</td>
+<td class="et5" width="72" height="19">1A</td>
+<td class="et4" width="575" height="19">Thomas Grain Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">143</td>
+<td class="et5" width="72" height="19">1B</td>
+<td class="et4" width="575" height="19">Goss Grain Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">144</td>
+<td class="et5" width="72" height="19">1C</td>
+<td class="et4" width="575" height="19">Witcombe Wood Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">145</td>
+<td class="et5" width="72" height="19">1D</td>
+<td class="et4" width="575" height="19">Foster Wood Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">146</td>
+<td class="et5" width="72" height="19">1E</td>
+<td class="et4" width="575" height="19">Moreland Wood Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">147</td>
+<td class="et5" width="72" height="19">1F</td>
+<td class="et4" width="575" height="19">MPS Iron Ore Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">148</td>
+<td class="et5" width="72" height="19">20</td>
+<td class="et4" width="575" height="19">Uhl Iron Ore Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">149</td>
+<td class="et5" width="72" height="19">21</td>
+<td class="et4" width="575" height="19">Chippy Iron Ore Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">150</td>
+<td class="et5" width="72" height="19">22</td>
+<td class="et4" width="575" height="19">Balogh Steel Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">151</td>
+<td class="et5" width="72" height="19">23</td>
+<td class="et4" width="575" height="19">Uhl Steel Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">152</td>
+<td class="et5" width="72" height="19">24</td>
+<td class="et4" width="575" height="19">Kelling Steel Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">153</td>
+<td class="et5" width="72" height="19">25</td>
+<td class="et4" width="575" height="19">Balogh Armoured Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">154</td>
+<td class="et5" width="72" height="19">26</td>
+<td class="et4" width="575" height="19">Uhl Armoured Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">155</td>
+<td class="et5" width="72" height="19">27</td>
+<td class="et4" width="575" height="19">Foster Armoured Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">156</td>
+<td class="et5" width="72" height="19">28</td>
+<td class="et4" width="575" height="19">Foster Food Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">157</td>
+<td class="et5" width="72" height="19">29</td>
+<td class="et4" width="575" height="19">Perry Food Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">158</td>
+<td class="et5" width="72" height="19">2A</td>
+<td class="et4" width="575" height="19">Chippy Food Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">159</td>
+<td class="et5" width="72" height="19">2B</td>
+<td class="et4" width="575" height="19">Uhl Paper Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">160</td>
+<td class="et5" width="72" height="19">2C</td>
+<td class="et4" width="575" height="19">Balogh Paper Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">161</td>
+<td class="et5" width="72" height="19">2D</td>
+<td class="et4" width="575" height="19">MPS Paper Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">162</td>
+<td class="et5" width="72" height="19">2E</td>
+<td class="et4" width="575" height="19">MPS Copper Ore Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">163</td>
+<td class="et5" width="72" height="19">2F</td>
+<td class="et4" width="575" height="19">Uhl Copper Ore Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">164</td>
+<td class="et5" width="72" height="19">30</td>
+<td class="et4" width="575" height="19">Goss Copper Ore Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">165</td>
+<td class="et5" width="72" height="19">31</td>
+<td class="et4" width="575" height="19">Uhl Water Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">166</td>
+<td class="et5" width="72" height="19">32</td>
+<td class="et4" width="575" height="19">Balogh Water Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">167</td>
+<td class="et5" width="72" height="19">33</td>
+<td class="et4" width="575" height="19">MPS Water Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">168</td>
+<td class="et5" width="72" height="19">34</td>
+<td class="et4" width="575" height="19">Balogh Fruit Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">169</td>
+<td class="et5" width="72" height="19">35</td>
+<td class="et4" width="575" height="19">Uhl Fruit Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">170</td>
+<td class="et5" width="72" height="19">36</td>
+<td class="et4" width="575" height="19">Kelling Fruit Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">171</td>
+<td class="et5" width="72" height="19">37</td>
+<td class="et4" width="575" height="19">Balogh Rubber Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">172</td>
+<td class="et5" width="72" height="19">38</td>
+<td class="et4" width="575" height="19">Uhl Rubber Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">173</td>
+<td class="et5" width="72" height="19">39</td>
+<td class="et4" width="575" height="19">RMT Rubber Truck</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">卡车 - Toyland</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">174</td>
+<td class="et5" width="72" height="19">3A</td>
+<td class="et4" width="575" height="19">MightyMover Sugar Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">175</td>
+<td class="et5" width="72" height="19">3B</td>
+<td class="et4" width="575" height="19">Powernaught Sugar Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">176</td>
+<td class="et5" width="72" height="19">3C</td>
+<td class="et4" width="575" height="19">Wizzowow Sugar Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">177</td>
+<td class="et5" width="72" height="19">3D</td>
+<td class="et4" width="575" height="19">MightyMover Cola Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">178</td>
+<td class="et5" width="72" height="19">3E</td>
+<td class="et4" width="575" height="19">Powernaught Cola Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">179</td>
+<td class="et5" width="72" height="19">3F</td>
+<td class="et4" width="575" height="19">Wizzowow Cola Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">180</td>
+<td class="et5" width="72" height="19">40</td>
+<td class="et4" width="575" height="19">MightyMover Candyfloss Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">181</td>
+<td class="et5" width="72" height="19">41</td>
+<td class="et4" width="575" height="19">Powernaught Candyfloss Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">182</td>
+<td class="et5" width="72" height="19">42</td>
+<td class="et4" width="575" height="19">Wizzowow Candyfloss Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">183</td>
+<td class="et5" width="72" height="19">43</td>
+<td class="et4" width="575" height="19">MightyMover Toffee Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">184</td>
+<td class="et5" width="72" height="19">44</td>
+<td class="et4" width="575" height="19">Powernaught Toffee Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">185</td>
+<td class="et5" width="72" height="19">45</td>
+<td class="et4" width="575" height="19">Wizzowow Toffee Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">186</td>
+<td class="et5" width="72" height="19">46</td>
+<td class="et4" width="575" height="19">MightyMover Toy Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">187</td>
+<td class="et5" width="72" height="19">47</td>
+<td class="et4" width="575" height="19">Powernaught Toy Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">188</td>
+<td class="et5" width="72" height="19">48</td>
+<td class="et4" width="575" height="19">Wizzowow Toy Van</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">189</td>
+<td class="et5" width="72" height="19">49</td>
+<td class="et4" width="575" height="19">MightyMover Sweet Lorry</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">190</td>
+<td class="et5" width="72" height="19">4A</td>
+<td class="et4" width="575" height="19">Powernaught Sweet Lorry</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">191</td>
+<td class="et5" width="72" height="19">4B</td>
+<td class="et4" width="575" height="19">Wizzowow Sweet Lorry</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">192</td>
+<td class="et5" width="72" height="19">4C</td>
+<td class="et4" width="575" height="19">MightyMover Battery Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">193</td>
+<td class="et5" width="72" height="19">4D</td>
+<td class="et4" width="575" height="19">Powernaught Battery Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">194</td>
+<td class="et5" width="72" height="19">4E</td>
+<td class="et4" width="575" height="19">Wizzowow Battery Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">195</td>
+<td class="et5" width="72" height="19">4F</td>
+<td class="et4" width="575" height="19">MightyMover Fizzy Drink Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">196</td>
+<td class="et5" width="72" height="19">50</td>
+<td class="et4" width="575" height="19">Powernaught Fizzy Drink Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">197</td>
+<td class="et5" width="72" height="19">51</td>
+<td class="et4" width="575" height="19">Wizzowow Fizzy Drink Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">198</td>
+<td class="et5" width="72" height="19">52</td>
+<td class="et4" width="575" height="19">MightyMover Plastic Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">199</td>
+<td class="et5" width="72" height="19">53</td>
+<td class="et4" width="575" height="19">Powernaught Plastic Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">200</td>
+<td class="et5" width="72" height="19">54</td>
+<td class="et4" width="575" height="19">Wizzowow Plastic Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">201</td>
+<td class="et5" width="72" height="19">55</td>
+<td class="et4" width="575" height="19">MightyMover Bubble Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">202</td>
+<td class="et5" width="72" height="19">56</td>
+<td class="et4" width="575" height="19">Powernaught Bubble Truck</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">203</td>
+<td class="et5" width="72" height="19">57</td>
+<td class="et4" width="575" height="19">Wizzowow Bubble Truck</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">轮船</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">204</td>
+<td class="et5" width="72" height="19">0</td>
+<td class="et4" width="575" height="19">MPS Oil Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">205</td>
+<td class="et5" width="72" height="19">1</td>
+<td class="et4" width="575" height="19">CS-Inc. Oil Tanker</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">206</td>
+<td class="et5" width="72" height="19">2</td>
+<td class="et4" width="575" height="19">MPS Passenger Ferry</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">207</td>
+<td class="et5" width="72" height="19">3</td>
+<td class="et4" width="575" height="19">FFP Passenger Ferry</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">208</td>
+<td class="et5" width="72" height="19">4</td>
+<td class="et4" width="575" height="19">Bakewell 300 Hovercraft</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">209</td>
+<td class="et5" width="72" height="19">5</td>
+<td class="et4" width="575" height="19">Chugger-Chug Passenger Ferry</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">210</td>
+<td class="et5" width="72" height="19">6</td>
+<td class="et4" width="575" height="19">Shivershake Passenger Ferry</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">211</td>
+<td class="et5" width="72" height="19">7</td>
+<td class="et4" width="575" height="19">Yate Cargo ship</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">212</td>
+<td class="et5" width="72" height="19">8</td>
+<td class="et4" width="575" height="19">Bakewell Cargo ship</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">213</td>
+<td class="et5" width="72" height="19">9</td>
+<td class="et4" width="575" height="19">Mightymover Cargo ship</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">214</td>
+<td class="et5" width="72" height="19">0A</td>
+<td class="et4" width="575" height="19">Powernaut Cargo ship</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">飞机</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">215</td>
+<td class="et5" width="72" height="19">0</td>
+<td class="et4" width="575" height="19">Sampson U52</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">216</td>
+<td class="et5" width="72" height="19">1</td>
+<td class="et4" width="575" height="19">Coleman Count</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">217</td>
+<td class="et5" width="72" height="19">2</td>
+<td class="et4" width="575" height="19">FFP Dart</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">218</td>
+<td class="et5" width="72" height="19">3</td>
+<td class="et4" width="575" height="19">Yate Haugan</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">219</td>
+<td class="et5" width="72" height="19">4</td>
+<td class="et4" width="575" height="19">Bakewell Cotswald LB-3</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">220</td>
+<td class="et5" width="72" height="19">5</td>
+<td class="et4" width="575" height="19">Bakewell Luckett LB-8</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">221</td>
+<td class="et5" width="72" height="19">6</td>
+<td class="et4" width="575" height="19">Bakewell Luckett LB-9</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">222</td>
+<td class="et5" width="72" height="19">7</td>
+<td class="et4" width="575" height="19">Bakewell Luckett LB80</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">223</td>
+<td class="et5" width="72" height="19">8</td>
+<td class="et4" width="575" height="19">Bakewell Luckett LB-10</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">224</td>
+<td class="et5" width="72" height="19">9</td>
+<td class="et4" width="575" height="19">Bakewell Luckett LB-11</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">225</td>
+<td class="et5" width="72" height="19">0A</td>
+<td class="et4" width="575" height="19">Yate Aerospace YAC 1-11</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">226</td>
+<td class="et5" width="72" height="19">0B</td>
+<td class="et4" width="575" height="19">Darwin 100</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">227</td>
+<td class="et5" width="72" height="19">0C</td>
+<td class="et4" width="575" height="19">Darwin 200</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">228</td>
+<td class="et5" width="72" height="19">0D</td>
+<td class="et4" width="575" height="19">Darwin 300</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">229</td>
+<td class="et5" width="72" height="19">0E</td>
+<td class="et4" width="575" height="19">Darwin 400</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">230</td>
+<td class="et5" width="72" height="19">0F</td>
+<td class="et4" width="575" height="19">Darwin 500</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">231</td>
+<td class="et5" width="72" height="19">10</td>
+<td class="et4" width="575" height="19">Darwin 600</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">232</td>
+<td class="et5" width="72" height="19">11</td>
+<td class="et4" width="575" height="19">Guru Galaxy</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">233</td>
+<td class="et5" width="72" height="19">12</td>
+<td class="et4" width="575" height="19">Airtaxi A21</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">234</td>
+<td class="et5" width="72" height="19">13</td>
+<td class="et4" width="575" height="19">Airtaxi A31</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">235</td>
+<td class="et5" width="72" height="19">14</td>
+<td class="et4" width="575" height="19">Airtaxi A32</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">236</td>
+<td class="et5" width="72" height="19">15</td>
+<td class="et4" width="575" height="19">Airtaxi A33</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">237</td>
+<td class="et5" width="72" height="19">16</td>
+<td class="et4" width="575" height="19">Yate Aerospace YAe46</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">238</td>
+<td class="et5" width="72" height="19">17</td>
+<td class="et4" width="575" height="19">Dinger 100</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">239</td>
+<td class="et5" width="72" height="19">18</td>
+<td class="et4" width="575" height="19">AirTaxi A34-1000</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">240</td>
+<td class="et5" width="72" height="19">19</td>
+<td class="et4" width="575" height="19">Yate Z-Shuttle</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">241</td>
+<td class="et5" width="72" height="19">1A</td>
+<td class="et4" width="575" height="19">Kelling K1</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">242</td>
+<td class="et5" width="72" height="19">1B</td>
+<td class="et4" width="575" height="19">Kelling K6</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">243</td>
+<td class="et5" width="72" height="19">1C</td>
+<td class="et4" width="575" height="19">Kelling K7</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">244</td>
+<td class="et5" width="72" height="19">1D</td>
+<td class="et4" width="575" height="19">Darwin 700</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">245</td>
+<td class="et5" width="72" height="19">1E</td>
+<td class="et4" width="575" height="19">FFP Hyperdart 2</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">246</td>
+<td class="et5" width="72" height="19">1F</td>
+<td class="et4" width="575" height="19">Dinger 200</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">247</td>
+<td class="et5" width="72" height="19">20</td>
+<td class="et4" width="575" height="19">Dinger 1000</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">248</td>
+<td class="et5" width="72" height="19">21</td>
+<td class="et4" width="575" height="19">Ploddyphut 100</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">249</td>
+<td class="et5" width="72" height="19">22</td>
+<td class="et4" width="575" height="19">Ploddyphut 500</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">250</td>
+<td class="et5" width="72" height="19">23</td>
+<td class="et4" width="575" height="19">Flashbang X1</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">251</td>
+<td class="et5" width="72" height="19">24</td>
+<td class="et4" width="575" height="19">Juggerplane M1</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">252</td>
+<td class="et5" width="72" height="19">25</td>
+<td class="et4" width="575" height="19">Flashbang Wizzer</td>
+</tr>
+<tr>
+<td class="et2" colspan="3" width="360" height="25">直升机</td>
+</tr>
+<tr>
+<td class="et3" style="font-weight: bold;" width="144" height="48">ID</td>
+<td class="et3" style="font-weight: bold;" width="72" height="48">NFO ID(十六进制)</td>
+<td class="et3" style="font-weight: bold;" width="575" height="48">车辆名称</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">253</td>
+<td class="et5" width="72" height="19">26</td>
+<td class="et4" width="575" height="19">Tricario Helicopter</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">254</td>
+<td class="et5" width="72" height="19">27</td>
+<td class="et4" width="575" height="19">Guru X2 Helicopter</td>
+</tr>
+<tr>
+<td class="et4" width="144" height="19">255</td>
+<td class="et5" width="72" height="19">28</td>
+<td class="et4" width="575" height="19">Powernaut Helicopter</td>
+</tr>
+</tbody>
+</table></p>

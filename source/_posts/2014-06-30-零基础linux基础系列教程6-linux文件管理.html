@@ -1,0 +1,267 @@
+---
+layout: post
+title: 零基础linux基础系列教程6-linux文件管理
+categories:
+- linux使用
+- 技术
+- 教程
+tags: []
+published: true
+comments: true
+---
+<p><h2><b>介绍</b></h2>
+Linux使用一个树状的层次结构来组织它的各种文件与目录，把不同作用的文件组织到不同的目录时一个非常好的习惯，这样能方便我们查找文件。下面介绍如何管理linux系统中的文件与目录。
+<h2><b>创建目录</b></h2>
+[root@pidora ~]# mkdir [options] &lt;Directory&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>使用这个命令将会在你的当前目录下面创建一个目录，mkdir命令有几个有用的选项，你也可以通过man命令来查看mkdir命令有哪些选项。Mkdir命令的-p选项可以创建这个目录，包括其父目录。我们下面会有一个例子进行演示。Mkdir的-v命令可以让mkdir在执行时输出更多的信息。下面我们看一下例子：</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# mkdir -p linuxtutorialwork/foo/bar</p>
+
+<p>[root@pidora ~]# cd linuxtutorialwork/foo/bar</p>
+
+<p>[root@pidora ~]# pwd</p>
+
+<p>[root@pidora ~]# /home/ryan/linuxtutorialwork/foo/bar</p>
+
+<p>&nbsp;</p>
+
+<p>你可以看到我们指定了mkdir的-p选项，通过该选项创建整个“linuxtutorialwork/foo/bar”目录结构，如果linuxtutorialwork不存在，命令会创建，如果foo不存在，命令也会自动创建，直到创建了bar。如果你不指定-p选项，mkdir命令时不会创建父目录的。</p>
+
+<p>&nbsp;</p>
+
+<p>如果同样的命令你增加了-v选项，你会看到如下结果：</p>
+
+<p>[root@pidora ~]# mkdir -pv linuxtutorialwork/foo/bar</p>
+
+<p>mkdir: created directory 'linuxtutorialwork/foo'</p>
+
+<p>mkdir: created directory 'linuxtutorialwork/foo/bar'</p>
+
+<p>[root@pidora ~]# cd linuxtutorialwork/foo/bar</p>
+
+<p>[root@pidora ~]# pwd</p>
+
+<p>[root@pidora ~]# /home/ryan/linuxtutorialwork/foo/bar</p>
+
+<p>&nbsp;
+<h2><b>删除目录</b></h2>
+&nbsp;</p>
+
+<p>创建目录非常容易，删除目录也一样，一个需要注意的事情是，在linux命令行中没有后悔药吃，如果你不小心删除了一个目录，那个目录就永久的删除了，你不能撤销删除。所以你一定要非常小心。删除目录的命令如下：.</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# rmdir [options] &lt;Directory&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>与mkdir命令一样，删除目录也支持 -v 和 -p 选项。但是，被删除的目录中不能存在其他文件。例子如下：</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# rmdir linuxtutorialwork/foo/bar</p>
+
+<p>[root@pidora ~]# ls linuxtutorialwork/foo</p>
+
+<p>可以看到bar目录已经被删除了。</p>
+
+<p>创建一个没有内容的文件</p>
+
+<p>&nbsp;</p>
+
+<p>许多可以改变文件内容的命令都有一个非常好的特性，如果文件不存在，他们会自动创建文件。我们也可以使用touch命令去创建空文件。touch命令格式如下：</p>
+
+<p>&nbsp;</p>
+
+<p>touch [options] &lt;filename&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>如下例子：</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# pwd</p>
+
+<p>/home/ryan/linuxtutorialwork</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>foo</p>
+
+<p>[root@pidora ~]# touch example1</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>example1 foo</p>
+
+<p>&nbsp;
+<h2><b>拷贝文件或目录</b></h2>
+&nbsp;</p>
+
+<p>有时候我们需要对一个文件或目录做一个复制，通常我们在修改它们之前我们会做一个拷贝。一致当我们出错时可以进行恢复。 拷贝文件或目录的命令如下：</p>
+
+<p>&nbsp;</p>
+
+<p>cp [options] &lt;source&gt; &lt;destination&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>举个例子如下：.</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>example1 foo</p>
+
+<p>[root@pidora ~]# cp example1 barney</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>barney example1 foo</p>
+
+<p>&nbsp;</p>
+
+<p>我们拷贝了example1文件为barney文件。source（源路径）与destination（目的路径）可以是相对路径或绝对路径。例子如下：</p>
+
+<p>[root@pidora ~]# cp /home/ryan/linuxtutorialwork/example2 example3</p>
+
+<p>[root@pidora ~]# cp example2 ../../backups</p>
+
+<p>[root@pidora ~]# cp ecample2 ../../backups/example4</p>
+
+<p>[root@pidora ~]# cp /home/ryan/linuxtutorialwork/example2 /otherdir/foo/example5</p>
+
+<p>&nbsp;</p>
+
+<p>默认情况下cp命令只拷贝一个文件，使用 -r 选项，我们可以递归拷贝目录及其子目录，例子如下：</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>barney example1 foo</p>
+
+<p>[root@pidora ~]# cp foo foo2</p>
+
+<p>cp: omitting directory 'foo'</p>
+
+<p>[root@pidora ~]# cp -r foo foo2</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>barney example1 foo foo2</p>
+
+<p>&nbsp;</p>
+
+<p>在上面的例子中，在foo目录中的任何文件与目录将会拷贝到foo2。</p>
+
+<p>&nbsp;
+<h2><b>移动文件或目录</b></h2>
+我们可以使用mv（move单词的缩写）命令去移动一个文件或目录。其使用方法与cp命令类似。如下：</p>
+
+<p>&nbsp;</p>
+
+<p>mv [options] &lt;source&gt; &lt;destination&gt;</p>
+
+<p>&nbsp;</p>
+
+<p>一个例子：</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>barney example1 foo foo2</p>
+
+<p>[root@pidora ~]# mkdir backups</p>
+
+<p>[root@pidora ~]# mv foo2 backups/foo3</p>
+
+<p>[root@pidora ~]# mv barney backups/</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>backups example1 foo</p>
+
+<p>&nbsp;
+<h2><b>重命名文件和目录</b></h2>
+&nbsp;</p>
+
+<p>mv命令也可以用来重命名文件或目录，如果我们指定的source与destination是在同一个目录，但是不同的名字，那么文件或目录就会被重命名，如下：</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>backups example1 foo</p>
+
+<p>[root@pidora ~]# mv foo foo3</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>backups example1 foo3</p>
+
+<p>[root@pidora ~]# cd ..</p>
+
+<p>[root@pidora home]# mkdir linuxtutorialwork/testdir</p>
+
+<p>[root@pidora home]# mv linuxtutorialwork/testdir /home/ryan/linuxtutorialwork/fred</p>
+
+<p>[root@pidora home]# ls</p>
+
+<p>backups example1 foo3 fred</p>
+
+<p>&nbsp;
+<h2><b>删除文件与非空目录</b></h2>
+&nbsp;</p>
+
+<p>与删除目录一样，删除文件也是不可撤销的，你一定要非常小心。删除文件的命令如下：</p>
+
+<p>&nbsp;</p>
+
+<p>rm [options] &lt;file&gt;</p>
+
+<p>一个例子：</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>backups example1 foo3 fred</p>
+
+<p>[root@pidora ~]# rm example1</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>backups foo3 fred</p>
+
+<p>&nbsp;</p>
+
+<p>该命令也可以用来删除非空目录，使用 -r 选项，它允许我们删除目录及目录下的所有文件，例子如下：</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>backups foo3 fred</p>
+
+<p>[root@pidora ~]# rmdir backups</p>
+
+<p>rmdir: failed to remove 'backups': Directory not empty</p>
+
+<p>[root@pidora ~]# rm backups</p>
+
+<p>rm: cannot remove 'backups': Is a directory</p>
+
+<p>[root@pidora ~]# rm -r backups</p>
+
+<p>[root@pidora ~]# ls</p>
+
+<p>foo3 fred</p>
+
+<p>&nbsp;</p>
+
+<p>一个非常好的选项是-i选项，使用它我们可以进行交互式删除，这个选项会使命令在删除每个文件之前与你一一确认，给你一个取消删除的机会。</p>

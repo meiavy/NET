@@ -1,0 +1,73 @@
+---
+layout: post
+title: 零基础linux基础系列教程5-如何使用man
+categories:
+- linux使用
+- 技术
+- 教程
+tags: []
+published: true
+comments: true
+---
+<p><h3>介绍</h3>
+如果你的记忆力像我的一样， 你可能发现很难去记得每个命令行的各个选项，幸运的是，Linux提供给了我们一个非常好的朋友，一个男人（man)，男人总是无所不能的，是不是？其实man是“manual pages”的缩写，代表了手册页，手册中将会说明每个命令如何使用的细节。我们碰到不知道如何使用某个命令时，可以通过调用man命令解决问题。
+<h3>使用man</h3>
+我们通过如下方式调用man命令：</p>
+
+<p>[root@pidora ~]# man &lt;command to look up&gt;</p>
+
+<p>如：</p>
+
+<p>[root@pidora ~]# man ls</p>
+
+<p>屏幕输出如下
+<blockquote>Name</blockquote></p>
+
+<p>ls - list directory contents</p>
+
+<p>Synopsis</p>
+
+<p>ls [option] ... [file] ...</p>
+
+<p>Description</p>
+
+<p>List information about the FILEs (the current directory by default). Sort entries alphabetically if none of -cftuvSUX nor --sort is specified.</p>
+
+<p>Mandatory arguments to long options are mandatory for short options too.</p>
+
+<p>-a, --all</p>
+
+<p>do not ignore entries starting with .</p>
+
+<p>-A, --almost-all</p>
+
+<p>do not list implied . and ..</p>
+
+<p>...
+我们分解说明如下:</p>
+
+<p>Name： 告诉了我们这个命令的基本功能。</p>
+
+<p>Synopsis： 告诉我们使用这个命令的格式，[option]就是各个命令行选项输入的地方。</p>
+
+<p>Description： 命令的详细描述，接下来是命令的各个选项的说明。.
+<h3>搜索所有手册</h3>
+我们也可以使用某个关键字搜索所有的手册，当我们想要做某个事情但不知怎么去做时，可以使用相关的关键字（当然是英文关键字）搜索一下手册。可能会有惊喜。使用如下命令：</p>
+
+<p>[root@pidora ~]# man -k &lt;search term&gt;</p>
+
+<p>大家可以自己测试一下。
+<h3>长选项名与短选项名</h3>
+我们从man的输出可以看到，很多命令行选项有两个使用方式，例如上面的man ls的输出中，有一个选项 -a（短选项） 或者 --all（长选项） 完成的是同样的功能 (列出所有文件，包含以.开始的隐藏文件). 长选项人们更加容易记住，但短选项有一个优点，可以组合在一起。如：</p>
+
+<p>[root@pidora ~]#ls -a</p>
+
+<p>[root@pidora ~]#ls --all</p>
+
+<p>[root@pidora ~]#ls -alh</p>
+
+<p>你可以看到，短选项一般使用-，长选项使用--，最后一个即为短选项的组合使用，相当于以下命令：</p>
+
+<p>[root@pidora ~]#ls -a  -l  -h
+<h3>总结</h3>
+总之，你要记住，man是你最好的朋友。我们不需要去记住所有的东西，我们只要记住我们有最好的朋友：man。</p>

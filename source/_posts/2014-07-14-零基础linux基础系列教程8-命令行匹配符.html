@@ -1,0 +1,124 @@
+---
+layout: post
+title: 零基础linux基础系列教程8-命令行匹配符
+categories:
+- linux使用
+- 技术
+- 教程
+tags:
+- linux，linux教程，linux操作系统
+published: true
+comments: true
+---
+<p><h1><b>命令行通配符</b></h1>
+在linux中你可以使用命令行通配符来指定多个文件或目录。</p>
+
+<p>基本的命令行通配符如下：
+<ul>
+	<li><b> </b><b>*</b>- 代表零个或多个字符</li>
+	<li><b> </b><b>?</b>- 代表单个字符</li>
+	<li><b> </b><b>[]</b>- 代表一个字符范围，表示只能出现一个该范围中的字符</li>
+</ul>
+<b>*</b>的使用方法如下：</p>
+
+<p>[root@pidora ~]#pwd</p>
+
+<p>/home/ryan/linuxtutorialwork</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]#ls</p>
+
+<p>barry.txt blah.txt bob example.png firstfile foo1 foo2</p>
+
+<p>foo3 frog.png secondfile thirdfile video.mpeg</p>
+
+<p>&nbsp;</p>
+
+<p>[root@pidora ~]#ls b*</p>
+
+<p>barry.txt blah.txt bob</p>
+
+<p>&nbsp;
+<h1><b>实现机制</b></h1>
+命令行通配符的实现是比较有趣的，初看起来好像是ls命令接收参数b*，然后ls命令在内部处理b*，匹配文件名以b字符开始的多个文件。实际情况不是这样，处理命令行通配符是bash（就是我们的命令行界面）的功能。当bash看到命令行通配符的时候，bash会在命令运行之前对命令行通配符进行解析，替换命令行通配符为符合条件的路径， 如：</p>
+
+<p>[root@pidora ~]# ls b*</p>
+
+<p>我们输入上面的命令后，命令行解析器（bash）会首先把这条命令翻译成下面的形式:</p>
+
+<p>[root@pidora ~]#ls barry.txt blah.txt bob</p>
+
+<p>然后命令行才执行我们输入的ls命令，ls命令内部从来不会看到我们输入的命令行通配符，也不会处理它们。这意味着我们可以任何时候在命令行中使用命令行通配符，而不仅仅是局限于某个命令。
+<h1><b>更多的例子</b></h1>
+下面我们看一些更多在命令行使用命令行通配符的例子。命令行通配符可以与任何命令搭配使用。<span style="color: #ff0000;">但命令行通配符只能在需要表示绝对路径或相对路径的时候使用</span>。如：</p>
+
+<p>[root@pidora ~]#ls /home/ryan/linuxtutorialwork/*.txt</p>
+
+<p>barry.txt blah.txt</p>
+
+<p>上面的命令列出了目录中所有以.txt结尾的文件。</p>
+
+<p>看一下问号?，列出所有文件名的第二个字符为i的文件，?代表第一个字符：</p>
+
+<p>[root@pidora ~]#ls ?i*</p>
+
+<p>firstfile video.mpeg</p>
+
+<p>列出所有包含3个字符的扩展名的文件：</p>
+
+<p>[root@pidora ~]#ls *.???</p>
+
+<p>barry.txt blah.txt example.png frog.png</p>
+
+<p>&nbsp;</p>
+
+<p>看一下[]匹配符，列出所有文件名以s或v开始的文件：</p>
+
+<p>[root@pidora ~]#ls [sv]*</p>
+
+<p>secondfile video.mpeg</p>
+
+<p>&nbsp;</p>
+
+<p>我们也可以使用中划线-表示一个集合范围，如列出所有文件名中包含数字的文件:</p>
+
+<p>[root@pidora ~]#ls *[0-9]*</p>
+
+<p>foo1 foo2 foo3</p>
+
+<p>&nbsp;</p>
+
+<p>可以使用^表示取反，如列出所有非小写字母a到k开头的文件：</p>
+
+<p>[root@pidora ~]#ls [^a-k]*</p>
+
+<p>secondfile thirdfile video.mpeg</p>
+
+<p>&nbsp;</p>
+
+<p>查看某个目录下的文件的文件类型：</p>
+
+<p>[root@pidora ~]#file /home/ryan/*</p>
+
+<p>bin: directory</p>
+
+<p>Documents: directory</p>
+
+<p>frog.png: PNG image data</p>
+
+<p>public_html: directory</p>
+
+<p>移动所有jpg或png等图片文件到其他目录：</p>
+
+<p>[root@pidora ~]#mv public_html/*.??g public_html/images/</p>
+
+<p>&nbsp;</p>
+
+<p>查看 .bash_history 文件的大小与修改时间，每个linux用户的home目录都会存在这个文件，保存用户所输入的命令的历史记录。是一个隐藏文件：</p>
+
+<p>[root@pidora ~]#ls -lh /home/*/.bash_history</p>
+
+<p>-rw------- 1 harry users 2.7K Jan 4 07:32 /home/harry/.bash_history</p>
+
+<p>-rw------- 1 ryan users 3.1K Jun 12 21:16 /home/ryan/.bash_history</p>

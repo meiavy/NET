@@ -1,0 +1,459 @@
+---
+layout: post
+title: kafka-storm-zookeeper实时日志分析6-守护模式部署
+categories:
+- 教程
+tags:
+- kafka
+- storm
+- zookeeper
+published: true
+comments: true
+---
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析1-序" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%901-%e5%ba%8f/">kafka-storm-zookeeper实时日志分析1-序</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析2-环境准备" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%90-1/">kafka-storm-zookeeper实时日志分析2-环境准备</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析3-部署zookeeper" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%903-%e9%83%a8%e7%bd%b2zookeeper/">kafka-storm-zookeeper实时日志分析3-部署zookeeper</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析4-部署kafka" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%904-%e9%83%a8%e7%bd%b2kafka/">kafka-storm-zookeeper实时日志分析4-部署kafka</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #2ea2cc;" title="kafka-storm-zookeeper实时日志分析5-部署storm" href="http://www.itcsl.cn/2014/05/23/44/">kafka-storm-zookeeper实时日志分析5-部署storm</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析6-守护模式部署" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%906-%e5%ae%88%e6%8a%a4%e6%a8%a1%e5%bc%8f%e9%83%a8%e7%bd%b2/">kafka-storm-zookeeper实时日志分析6-守护模式部署</a></span>
+<h1>1 守护模式部署</h1>
+在生产环境下，我们不应该手动启动或停止zookeeper、kafka、storm等进程，这些集群在设计上已经保证了集群中的某台主机出现故障时，不会影响功能。但一个集群中同时多台主机出现故障时，则会有问题。所以我们需要部署守护进程，当某个进程异常退出时，守护进程会自动重新启动该进程。当某台主机重启时，相应的进程也会自动重启。</p>
+
+<p>&nbsp;</p>
+
+<p>我们采用supervisord作为我们的守护进程，下面描述了该如何部署supervisord并配置其监控我们集群中的服务。</p>
+
+<p>&nbsp;
+<h3>1.1.1 安装软件</h3>
+首先安装软件包：python-meld3-0.6.3-1.el5.x86_64.rpm，然后再安装软件包：supervisor-2.1-3.el5.noarch.rpm。注意zookeeper集群、kafka集群、storm集群的每一台机器上都需要安装。</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;
+<h3>1.1.2 配置监控zookeeper</h3>
+如果zookeeper进程已经手动启动，请首先把zookeeper进程kill掉。</p>
+
+<p>我们需要到zookeeper集群中的每台主机上，运行如下命令。
+<pre> [root@supervisor-102 jre-1.6.0-openjdk]# which java
+/usr/bin/java
+[root@supervisor-102 jre-1.6.0-openjdk]# echo $PATH
+/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+</pre>
+确保java程序所在路径在PATH环境变量中。</p>
+
+<p>修改/root/v300r003b01/zookeeper-3.4.6/bin/zkServer.sh文件，如下：
+<pre>#!/usr/bin/env bash</pre></p>
+
+<p>export PATH=/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</p>
+
+<p># Licensed to the Apache Software Foundation (ASF) under one or more<br />
+# contributor license agreements.  See the NOTICE file distributed with<br />
+# this work for additional information regarding copyright ownership.<br />
+# The ASF licenses this file to You under the Apache License, Version 2.0<br />
+# (the "License"); you may not use this file except in compliance with<br />
+# the License.  You may obtain a copy of the License at<br />
+#
+#     http://www.apache.org/licenses/LICENSE-2.0<br />
+#
+# Unless required by applicable law or agreed to in writing, software<br />
+# distributed under the License is distributed on an "AS IS" BASIS,<br />
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+# See the License for the specific language governing permissions and<br />
+# limitations under the License.</p>
+
+<p>#<br />
+# If this scripted is run out of /usr/bin or some other system bin directory<br />
+# it should be linked to and not copied. Things like java jar files are found<br />
+# relative to the canonical path of this script.<br />
+#</p>
+
+<p># See the following page for extensive details on setting<br />
+# up the JVM to accept JMX remote management:<br />
+# http://java.sun.com/javase/6/docs/technotes/guides/management/agent.html<br />
+# by default we allow local JMX connections<br />
+if [ "x$JMXLOCALONLY" = "x" ]<br />
+then<br />
+    JMXLOCALONLY=false<br />
+fi</p>
+
+<p>if [ "x$JMXDISABLE" = "x" ]<br />
+then<br />
+    
+
+把其中的PATH值与我们echo $PATH的值保持一致。注意可能不是每一台主机都一样，请对每台主机单独设置。</p>
+
+<p>&nbsp;</p>
+
+<p>在zookeeper集群的主机上，修改supervisor的配置文件[root@supervisor-102 bin]# vi /etc/supervisord.conf，最后面增加如下，注意根据环境修改：</p>
+
+<p>&nbsp;
+<pre>[program:zookeeper]</pre></p>
+
+<p>;command=          ; the program (relative uses PATH, can take args)</p>
+
+<p>command=/root/v300r003b01/zookeeper-3.4.6/bin/zkServer.sh start-foreground</p>
+
+<p>;priority=                ; the relative start priority (default 999)</p>
+
+<p>;autostart=true              ; start at supervisord start (default: true)</p>
+
+<p>;autorestart=true            ; retstart at unexpected quit (default: true)</p>
+
+<p>;startsecs=10                ; number of secs prog must stay running (def. 10)</p>
+
+<p>;startretries=3              ; max # of serial start failures (default 3)</p>
+
+<p>;exitcodes=0,2               ; 'expected' exit codes for process (default 0,2)</p>
+
+<p>;stopsignal=KILL             ; signal used to kill process (default TERM)</p>
+
+<p>;stopwaitsecs=10             ; max num secs to wait before SIGKILL (default 10)</p>
+
+<p>;user=root                 ; setuid to this UNIX account to run the program</p>
+
+<p>;log_stdout=true             ; if true, log program stdout (default true)</p>
+
+<p>;log_stderr=true             ; if true, log program stderr (def false)</p>
+
+<p>logfile=/var/log/supervisord-zookeeper.log    ; child log path, use NONE for none; default AUTO</p>
+
+<p>;logfile_maxbytes=1MB        ; max # logfile bytes b4 rotation (default 50MB)</p>
+
+<p>;logfile_backups=10          ; # of logfile backups (default 10)
+
+&nbsp;</p>
+
+<p>执行如下命令，启动supervisord服务</p>
+
+<p>[root@nimbus-101 ~]# service supervisord start</p>
+
+<p>查看zookeeper进程是否自动启动，记住zookeeper进程id</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep zoo</p>
+
+<p>重新启动supervisor服务</p>
+
+<p>[root@nimbus-101 ~]# service supervisord restart</p>
+
+<p>查看zookeeper进程是否再次启动，本次的进程id应该与上次的不一样</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep zoo</p>
+
+<p>&nbsp;</p>
+
+<p>最后配置supervisord开机自动启动</p>
+
+<p>[root@nimbus-101 ~]# chkconfig --level  345 supervisord on</p>
+
+<p>&nbsp;</p>
+
+<p>重启服务器测试是否开机自动启动了zookeeper进程。</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;
+<h3>1.1.3 配置监控kafka</h3>
+如果kafka进程已经手动启动，请首先把kafka进程kill掉。</p>
+
+<p>我们需要到kafka集群中的每台主机上，运行如下命令。
+<pre> [root@supervisor-102 jre-1.6.0-openjdk]# which java
+/usr/bin/java
+[root@supervisor-102 jre-1.6.0-openjdk]# echo $PATH
+/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+</pre>
+确保java程序所在路径在PATH环境变量中。</p>
+
+<p>修改/root/v300r003b01/kafka_2.9.2-0.8.1/bin/kafka-server-start.sh文件，如下：
+<pre>#!/bin/bash
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.
+# The ASF licenses this file to You under the Apache License, Version 2.0
+# (the "License"); you may not use this file except in compliance with
+# the License.  You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+export PATH=/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin</pre></p>
+
+<p>if [ $# -lt 1 ];<br />
+then<br />
+        echo "USAGE: $0 [-daemon] server.properties"<br />
+        exit 1<br />
+fi<br />
+base_dir=$(dirname $0)<br />
+export KAFKA_LOG4J_OPTS="-Dlog4j.configuration=file:$base_dir/../config/log4j.properties"<br />
+export KAFKA_HEAP_OPTS="-Xmx1G -Xms1G"</p>
+
+<p>EXTRA_ARGS="-name kafkaServer -loggc"  
+
+把其中的PATH值与我们echo $PATH的值保持一致。注意可能不是每一台主机都一样，请对每台主机单独设置。</p>
+
+<p>&nbsp;</p>
+
+<p>在kafka集群的主机上，修改supervisor的配置文件[root@supervisor-102 bin]# vi /etc/supervisord.conf，最后面增加如下，注意根据环境修改：</p>
+
+<p>&nbsp;
+<pre>[program:kafka]</pre></p>
+
+<p>;command=          ; the program (relative uses PATH, can take args)</p>
+
+<p>command=/root/v300r003b01/kafka_2.9.2-0.8.1/bin/kafka-server-start.sh /root/v300r003b01/kafka_2.9.2-0.8.1/config/server.properties</p>
+
+<p>;priority=                ; the relative start priority (default 999)</p>
+
+<p>;autostart=true              ; start at supervisord start (default: true)</p>
+
+<p>;autorestart=true            ; retstart at unexpected quit (default: true)</p>
+
+<p>;startsecs=10                ; number of secs prog must stay running (def. 10)</p>
+
+<p>;startretries=3              ; max # of serial start failures (default 3)</p>
+
+<p>;exitcodes=0,2               ; 'expected' exit codes for process (default 0,2)</p>
+
+<p>;stopsignal=KILL             ; signal used to kill process (default TERM)</p>
+
+<p>;stopwaitsecs=10             ; max num secs to wait before SIGKILL (default 10)</p>
+
+<p>;user=root                 ; setuid to this UNIX account to run the program</p>
+
+<p>;log_stdout=true             ; if true, log program stdout (default true)</p>
+
+<p>;log_stderr=true             ; if true, log program stderr (def false)</p>
+
+<p>logfile=/var/log/supervisord-kafka.log    ; child log path, use NONE for none; default AUTO</p>
+
+<p>;logfile_maxbytes=1MB        ; max # logfile bytes b4 rotation (default 50MB)</p>
+
+<p>;logfile_backups=10          ; # of logfile backups (default 10)
+
+&nbsp;</p>
+
+<p>执行如下命令，启动supervisord服务</p>
+
+<p>[root@nimbus-101 ~]# service supervisord start</p>
+
+<p>查看kafka进程是否自动启动，记住kafka进程id</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep kafka</p>
+
+<p>重新启动supervisor服务</p>
+
+<p>[root@nimbus-101 ~]# service supervisord restart</p>
+
+<p>查看kafka进程是否再次启动，本次的进程id应该与上次的不一样</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep kafka</p>
+
+<p>&nbsp;</p>
+
+<p>最后配置supervisord开机自动启动</p>
+
+<p>[root@nimbus-101 ~]# chkconfig --level  345 supervisord on</p>
+
+<p>重启服务器测试是否开机自动启动了kafka进程。</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;
+<h3>1.1.4 配置监控storm</h3>
+&nbsp;</p>
+
+<p>如果storm进程已经手动启动，请首先把storm进程kill掉。注意storm的nimbus进程、ui进程、supervisor进程都要kill掉。</p>
+
+<p>我们需要到storm集群中的每台主机上，运行如下命令。
+<pre>[root@supervisor-102 jre-1.6.0-openjdk]# which java
+/usr/bin/java
+[root@supervisor-102 jre-1.6.0-openjdk]# echo $PATH
+/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
+</pre>
+确保java程序所在路径在PATH环境变量中。</p>
+
+<p>修改/root/v300r003b01/apache-storm-0.9.1-incubating/bin/storm文件，如下：</p>
+
+<p>&nbsp;
+<pre>
+#!/usr/bin/python</pre></p>
+
+<p># Licensed to the Apache Software Foundation (ASF) under one<br />
+# or more contributor license agreements.  See the NOTICE file<br />
+# distributed with this work for additional information<br />
+# regarding copyright ownership.  The ASF licenses this file<br />
+# to you under the Apache License, Version 2.0 (the<br />
+# "License"); you may not use this file except in compliance<br />
+# with the License.  You may obtain a copy of the License at<br />
+#
+# http://www.apache.org/licenses/LICENSE-2.0<br />
+#
+# Unless required by applicable law or agreed to in writing, software<br />
+# distributed under the License is distributed on an "AS IS" BASIS,<br />
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.<br />
+# See the License for the specific language governing permissions and<br />
+# limitations under the License.</p>
+
+<p>import os<br />
+import sys<br />
+import random<br />
+import subprocess as sub<br />
+import getopt<br />
+import re</p>
+
+<p>os.environ['PATH'] = "/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin"</p>
+
+<p>def identity(x):<br />
+    return x<br />
+    
+
+把其中的PATH值与我们echo $PATH的值保持一致。注意可能不是每一台主机都一样，请对每台主机单独设置。
+<h4>1.1.4.1 Nimbus主机</h4>
+在storm集群的nimbus主机（192.168.1.107）上，修改supervisor的配置文件[root@supervisor-102 bin]# vi /etc/supervisord.conf，最后面增加如下，注意根据环境修改：
+<pre>
+[program:storm-nimbus]
+command=/root/v300r003b01/apache-storm-0.9.1-incubating/bin/storm nimbus          ; the program (relative uses PATH, can take args)
+;priority=100                ; the relative start priority (default 999)
+;autostart=true              ; start at supervisord start (default: true)
+;autorestart=true            ; retstart at unexpected quit (default: true)
+;startsecs=10                ; number of secs prog must stay running (def. 10)
+;startretries=3              ; max # of serial start failures (default 3)
+;exitcodes=0,2               ; 'expected' exit codes for process (default 0,2)
+;stopsignal=QUIT             ; signal used to kill process (default TERM)
+;stopwaitsecs=10             ; max num secs to wait before SIGKILL (default 10)
+;user=root                 ; setuid to this UNIX account to run the program
+;log_stdout=true             ; if true, log program stdout (default true)
+;log_stderr=true             ; if true, log program stderr (def false)
+logfile=/var/log/supervisord-storm-nimbus.log    ; child log path, use NONE for none; default AUTO
+;logfile_maxbytes=1MB        ; max # logfile bytes b4 rotation (default 50MB)
+;logfile_backups=10          ; # of logfile backups (default 10)</pre></p>
+
+<p>[program:storm-ui]<br />
+;command=          ; the program (relative uses PATH, can take args)<br />
+command=/root/v300r003b01/apache-storm-0.9.1-incubating/bin/storm ui<br />
+;priority=100                ; the relative start priority (default 999)<br />
+;autostart=true              ; start at supervisord start (default: true)<br />
+;autorestart=true            ; retstart at unexpected quit (default: true)<br />
+;startsecs=10                ; number of secs prog must stay running (def. 10)<br />
+;startretries=3              ; max # of serial start failures (default 3)<br />
+;exitcodes=0,2               ; 'expected' exit codes for process (default 0,2)<br />
+;stopsignal=QUIT             ; signal used to kill process (default TERM)<br />
+;stopwaitsecs=10             ; max num secs to wait before SIGKILL (default 10)<br />
+;user=root                 ; setuid to this UNIX account to run the program<br />
+;log_stdout=true             ; if true, log program stdout (default true)<br />
+;log_stderr=true             ; if true, log program stderr (def false)<br />
+logfile=/var/log/supervisord-storm-ui.log    ; child log path, use NONE for none; default AUTO<br />
+;logfile_maxbytes=1MB        ; max # logfile bytes b4 rotation (default 50MB)<br />
+;logfile_backups=10          ; # of logfile backups (default 10)</p>
+
+<p>[program:storm-supervisor]<br />
+;command=          ; the program (relative uses PATH, can take args)<br />
+command=/root/v300r003b01/apache-storm-0.9.1-incubating/bin/storm supervisor<br />
+;priority=                ; the relative start priority (default 999)<br />
+;autostart=true              ; start at supervisord start (default: true)<br />
+;autorestart=true            ; retstart at unexpected quit (default: true)<br />
+;startsecs=10                ; number of secs prog must stay running (def. 10)<br />
+;startretries=3              ; max # of serial start failures (default 3)<br />
+;exitcodes=0,2               ; 'expected' exit codes for process (default 0,2)<br />
+;stopsignal=QUIT             ; signal used to kill process (default TERM)<br />
+;stopwaitsecs=10             ; max num secs to wait before SIGKILL (default 10)<br />
+;user=root                 ; setuid to this UNIX account to run the program<br />
+;log_stdout=true             ; if true, log program stdout (default true)<br />
+;log_stderr=true             ; if true, log program stderr (def false)<br />
+logfile=/var/log/supervisord-storm-supervisor.log    ; child log path, use NONE for none; default AUTO<br />
+;logfile_maxbytes=1MB        ; max # logfile bytes b4 rotation (default 50MB)<br />
+;logfile_backups=10          ; # of logfile backups (default 10)
+
+执行如下命令，启动supervisord服务</p>
+
+<p>[root@nimbus-101 ~]# service supervisord start</p>
+
+<p>在storm集群的nimbus主机上查看storm的nimbus进程、ui进程、supervisor进程是否自动启动，记住他们的进程id</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep nimbus</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep ui</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep supervisor</p>
+
+<p>&nbsp;</p>
+
+<p>重新启动supervisor服务</p>
+
+<p>[root@nimbus-101 ~]# service supervisord restart</p>
+
+<p>再次查看storm的nimbus主机上的3个进程是否启动，本次的进程id应该与上次的不一样</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep nimbus</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep ui</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep supervisor</p>
+
+<p>&nbsp;</p>
+
+<p>最后配置supervisord开机自动启动</p>
+
+<p>[root@nimbus-101 ~]# chkconfig --level  345 supervisord on</p>
+
+<p>重启服务器测试是否开机自动启动了这3个进程。</p>
+
+<p>&nbsp;
+<h4>1.1.4.2 supervisor主机</h4>
+在storm集群的supervisor主机（192.168.1.108、192.168.1.109）上，修改supervisor的配置文件[root@supervisor-102 bin]# vi /etc/supervisord.conf，最后面增加如下，注意根据环境修改：</p>
+
+<p>&nbsp;
+<pre>
+[program:storm-supervisor]
+;command=          ; the program (relative uses PATH, can take args)
+command=/root/v300r003b01/apache-storm-0.9.1-incubating/bin/storm supervisor
+;priority=                ; the relative start priority (default 999)
+;autostart=true              ; start at supervisord start (default: true)
+;autorestart=true            ; retstart at unexpected quit (default: true)
+;startsecs=10                ; number of secs prog must stay running (def. 10)
+;startretries=3              ; max # of serial start failures (default 3)
+;exitcodes=0,2               ; 'expected' exit codes for process (default 0,2)
+;stopsignal=QUIT             ; signal used to kill process (default TERM)
+;stopwaitsecs=10             ; max num secs to wait before SIGKILL (default 10)
+;user=root                 ; setuid to this UNIX account to run the program
+;log_stdout=true             ; if true, log program stdout (default true)
+;log_stderr=true             ; if true, log program stderr (def false)
+logfile=/var/log/supervisord-storm-supervisor.log    ; child log path, use NONE for none; default AUTO
+;logfile_maxbytes=1MB        ; max # logfile bytes b4 rotation (default 50MB)
+;logfile_backups=10          ; # of logfile backups (default 10)
+</pre>
+执行如下命令，启动supervisord服务</p>
+
+<p>[root@nimbus-101 ~]# service supervisord start</p>
+
+<p>在storm集群的nimbus主机上查看storm的supervisor进程是否自动启动，记住进程id</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep supervisor</p>
+
+<p>&nbsp;</p>
+
+<p>重新启动supervisor服务</p>
+
+<p>[root@nimbus-101 ~]# service supervisord restart</p>
+
+<p>再次查看storm 的supervisor主机上的supervisor进程是否启动，本次的进程id应该与上次的不一样</p>
+
+<p>[root@nimbus-101 ~]# ps -ef | grep supervisor</p>
+
+<p>&nbsp;</p>
+
+<p>最后配置supervisord开机自动启动</p>
+
+<p>[root@nimbus-101 ~]# chkconfig --level  345 supervisord on</p>
+
+<p>重启服务器测试是否开机自动启动了supervisor个进程。</p>
+
+<p>&nbsp;</p>

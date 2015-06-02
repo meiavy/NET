@@ -1,0 +1,532 @@
+---
+layout: post
+title: OpenTTD如何修改车辆参数4-车辆属性列表
+categories:
+- 教程
+- 游戏
+tags:
+- NewGRF
+- openttd
+- 补丁
+- 车辆属性
+- 运输大亨
+published: true
+comments: true
+---
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="OpenTTD如何修改车辆参数1-工具" href="http://www.itcsl.cn/2014/05/27/openttd%e5%a6%82%e4%bd%95%e4%bf%ae%e6%94%b9%e8%bd%a6%e8%be%86%e5%8f%82%e6%95%b0-1/">OpenTTD如何修改车辆参数1-工具</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="OpenTTD如何修改车辆参数2-nfo文件格式" href="http://www.itcsl.cn/2014/05/30/openttd%e5%a6%82%e4%bd%95%e4%bf%ae%e6%94%b9%e8%bd%a6%e8%be%86%e5%8f%82%e6%95%b02-nfo%e6%96%87%e4%bb%b6%e6%a0%bc%e5%bc%8f/">OpenTTD如何修改车辆参数2-nfo文件格式</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="OpenTTD如何修改车辆参数3-车辆ID列表" href="http://www.itcsl.cn/2014/05/30/openttd%e5%a6%82%e4%bd%95%e4%bf%ae%e6%94%b9%e8%bd%a6%e8%be%86%e5%8f%82%e6%95%b03-%e8%bd%a6%e8%be%86id%e5%88%97%e8%a1%a8/">OpenTTD如何修改车辆参数3-车辆ID列表</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="OpenTTD如何修改车辆参数4-车辆属性列表" href="http://www.itcsl.cn/2014/05/30/openttd%e5%a6%82%e4%bd%95%e4%bf%ae%e6%94%b9%e8%bd%a6%e8%be%86%e5%8f%82%e6%95%b0/">OpenTTD如何修改车辆参数4-车辆属性列表</a></span></p>
+
+<p>&nbsp;
+<h1>通用属性</h1>
+<table width="408"><colgroup> <col width="72" /> <col width="145" /> <col width="191" /> </colgroup>
+<tbody>
+<tr>
+<td class="et2" style="font-weight: bold;" width="72" height="40">属性编号</td>
+<td class="et3" style="font-weight: bold; color: #333399;" width="145" height="40"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/GRFActionsDetailed">属性字节数</a></td>
+<td class="et2" style="font-weight: bold;" width="191" height="40">属性描述</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">0</td>
+<td class="et4" width="145" height="19">W</td>
+<td class="et4" width="191" height="19">面世日期，从1920年算起，每晚一天加一</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">2</td>
+<td class="et4" width="145" height="19">B</td>
+<td class="et4" width="191" height="19">reliability decay speed</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">3</td>
+<td class="et4" width="145" height="19">B</td>
+<td class="et4" width="191" height="19">车辆寿命</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">4</td>
+<td class="et4" width="145" height="19">B</td>
+<td class="et4" width="191" height="19">多少年内游戏中可购买该车辆</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">6</td>
+<td class="et4" width="145" height="19">B</td>
+<td class="et4" width="191" height="19">climate availability</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">7</td>
+<td class="et4" width="145" height="19">B</td>
+<td class="et4" width="191" height="19">load amount</td>
+</tr>
+</tbody>
+</table>
+&nbsp;
+<h1>汽车属性</h1>
+<table width="408"><colgroup> <col width="72" /> <col width="145" /> <col width="191" /> </colgroup>
+<tbody>
+<tr>
+<td class="et2" style="font-weight: bold;" width="72" height="32">属性编号</td>
+<td class="et3" style="font-weight: bold; color: #333399;" width="145" height="32"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/GRFActionsDetailed">属性字节数</a><img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image253.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image254.png" alt="" width="17" height="17" /></td>
+<td class="et2" style="font-weight: bold;" width="191" height="32">属性描述</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">8</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image255.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image256.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Speed in mph*3.2，速度</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">9</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image257.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image258.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Running cost factor，运营成本</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">0A</td>
+<td class="et4" width="145" height="32">D<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image259.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image260.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Running cost base, see below</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">0E</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image261.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image262.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Sprite ID (FF for new graphics)</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">0F</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image263.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image264.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Capacity，容量</td>
+</tr>
+<tr>
+<td class="et4" rowspan="3" width="72" height="130">10</td>
+<td class="et4" rowspan="3" width="145" height="130">B</td>
+<td class="et4" width="191" height="32"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/CargoTypes">Cargo type, see CargoTypes</a></td>
+</tr>
+<tr>
+<td class="et6" style="font-weight: bold;" width="191" height="49">GRFv<span class="font2">≤7</span><span class="font1"> </span><span class="font1">For GRF version 7 and below: Type B 'cargo slot'</span></td>
+</tr>
+<tr>
+<td class="et6" style="font-weight: bold;" width="191" height="49">GRFv<span class="font2">≥8</span><span class="font1"> </span><span class="font1">For GRF version 8 and above: Type A '(translated) cargo bit'</span></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">11</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image267.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image268.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Cost factor，成本</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">12</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image269.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image270.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Sound effect: 17/19/1A for regular, 3C/3E for toyland</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">13</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image271.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image272.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Power in 10 hp, see below，动力</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">14</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image273.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image274.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Weight in 1/4 tons, see below，重量</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">15</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image275.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image276.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Speed in mph*0.8, see below</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="80">16</td>
+<td class="et4" width="145" height="80">D<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image277.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image278.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="80"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/CargoTypes">Bit mask of cargo types available for refitting (not refittable if 0 or unset), see column 2 (bit values) in CargoTypes</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">17</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image279.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image280.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Callback flags bit mask, see below</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">18</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image281.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image282.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Coefficient of tractive effort</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">19</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image283.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image284.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Coefficient of air drag</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">1A</td>
+<td class="et4" width="145" height="48">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image285.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image286.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/BaseCosts">Refit cost, using 25% of the purchase price cost base</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="64">1B</td>
+<td class="et4" width="145" height="64">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image287.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image288.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="64"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/Action0General">Retire vehicle early, this many years before the end of phase 2 (see Action0General)</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">1C</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image289.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image290.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Miscellaneous vehicle flags</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">1D</td>
+<td class="et4" width="145" height="32">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image291.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image292.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32"><a title="Cargo_classes_28_29" href="#Cargo_classes_28_29">Refittable cargo classes, see train prop. 28</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">1E</td>
+<td class="et4" width="145" height="48">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image293.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image294.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48"><a title="Cargo_classes_28_29" href="#Cargo_classes_28_29">Non-refittable cargo classes, see train prop. 29</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">1F</td>
+<td class="et4" width="145" height="32">D<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image295.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image296.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Long format introduction date</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">20</td>
+<td class="et4" width="145" height="19">B*<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image297.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image298.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Sort the purchase list</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">21</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image299.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image300.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Visual effect</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">22</td>
+<td class="et4" width="145" height="19">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image301.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image302.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Custom cargo ageing period</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">23</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image303.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image304.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32"><a title="Shorter_train_vehicles_.2821.29" href="#Shorter_train_vehicles_.2821.29">Make vehicle shorter, see train property 21</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">24</td>
+<td class="et4" width="145" height="48">B n*B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image305.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image306.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48"><a title="List_of_always_refittable_cargo_types_.282C.2C_2D.29" href="#List_of_always_refittable_cargo_types_.282C.2C_2D.29">List of always refittable cargo types, see train property 2C</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">25</td>
+<td class="et4" width="145" height="48">B n*B</td>
+<td class="et4" width="191" height="48"><a title="List_of_always_refittable_cargo_types_.282C.2C_2D.29" href="#List_of_always_refittable_cargo_types_.282C.2C_2D.29">List of never refittable cargo types, see train property 2D</a></td>
+</tr>
+</tbody>
+</table>
+&nbsp;
+<h1>火车属性</h1>
+<table width="408"><colgroup> <col width="72" /> <col width="145" /> <col width="191" /> </colgroup>
+<tbody>
+<tr>
+<td class="et2" style="font-weight: bold;" width="72" height="32">属性编号</td>
+<td class="et3" style="font-weight: bold; color: #333399;" width="145" height="32"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/GRFActionsDetailed">属性字节数</a><img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image674.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image675.png" alt="" width="17" height="17" /></td>
+<td class="et2" style="font-weight: bold;" width="191" height="32">属性描述</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">5</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image676.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image677.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Track type (see below)</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="80">8</td>
+<td class="et4" width="145" height="80">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image678.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image679.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="80">AI special flag: set to 1 if engine is 'optimized' for passenger service (AI won't use it for other cargo), 0 otherwise</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">9</td>
+<td class="et4" width="145" height="32">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image680.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image681.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Speed in mph*1.6 (see below)，速度</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">0B</td>
+<td class="et4" width="145" height="19">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image682.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image683.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Power (0 for wagons)，动力</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">0D</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image684.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image685.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Running cost factor (0 for wagons)，运营成本</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">0E</td>
+<td class="et4" width="145" height="32">D<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image686.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image687.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Running cost base, see below</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">12</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image688.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image689.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Sprite ID (FD for new graphics)</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">13</td>
+<td class="et4" width="145" height="48">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image690.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image691.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48">Dual-headed flag; 1 if dual-headed engine, 0 otherwise</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">14</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image692.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image693.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Cargo capacity，容量</td>
+</tr>
+<tr>
+<td class="et4" rowspan="3" width="72" height="130">15</td>
+<td class="et4" rowspan="3" width="145" height="130">B</td>
+<td class="et4" width="191" height="32"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/CargoTypes">Cargo type, see CargoTypes</a></td>
+</tr>
+<tr>
+<td class="et6" style="font-weight: bold;" width="191" height="49">GRFv<span class="font2">≤7</span><span class="font1"> </span><span class="font1">For GRF version 7 and below: Type B 'cargo slot'</span></td>
+</tr>
+<tr>
+<td class="et6" style="font-weight: bold;" width="191" height="49">GRFv<span class="font2">≥8</span><span class="font1"> </span><span class="font1">For GRF version 8 and above: Type A '(translated) cargo bit'</span></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">16</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image696.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image697.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Weight in tons，重量</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">17</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image698.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image699.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Cost factor，成本</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="64">18</td>
+<td class="et4" width="145" height="64">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image700.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image701.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="64">Engine rank for the AI (AI selects the highest-rank engine of those it can buy)</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">19</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image702.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image703.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Engine traction type (see below)</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">1A</td>
+<td class="et4" width="145" height="48"><a href="#cite_note-1">B/B*[2]</a><img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image704.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image705.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48">Not a property, but an action: sort the purchase list.</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">1B</td>
+<td class="et4" width="145" height="48">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image706.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image707.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48">Power added by each wagon connected to this engine, see below</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">1C</td>
+<td class="et4" width="145" height="48">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image708.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image709.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/BaseCosts">Refit cost, using 50% of the purchase price cost base</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="64">1D</td>
+<td class="et4" width="145" height="64">D<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image710.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image711.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="64"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/CargoTypes">Bit mask of cargo types available for refitting, see column 2 (bit value) in CargoTypes</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">1E</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image712.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image713.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Callback flags bit mask, see below</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">1F</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image714.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image715.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Coefficient of tractive effort</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">20</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image716.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image717.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Coefficient of air drag</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">21</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image718.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image719.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Make vehicle shorter by this amount, see below</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="64">22</td>
+<td class="et4" width="145" height="64">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image720.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image721.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="64">Set visual effect type (steam/smoke/sparks) as well as position, see below</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="64">23</td>
+<td class="et4" width="145" height="64">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image722.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image723.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="64">Set how much weight is added by making wagons powered (i.e. weight of engine), see below</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">24</td>
+<td class="et4" width="145" height="48">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image724.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image725.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48">High byte of vehicle weight, weight will be prop.24*256+prop.16</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">25</td>
+<td class="et4" width="145" height="48">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image726.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image727.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48">User-defined bit mask to set when checking veh. var. 42</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="64">26</td>
+<td class="et4" width="145" height="64">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image728.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image729.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="64"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/Action0General">Retire vehicle early, this many years before the end of phase 2 (see Action0General)</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">27</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image730.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image731.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Miscellaneous flags</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">28</td>
+<td class="et4" width="145" height="19">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image732.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image733.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Refittable cargo classes</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">29</td>
+<td class="et4" width="145" height="32">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image734.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image735.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Non-refittable cargo classes</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">2A</td>
+<td class="et4" width="145" height="32">D<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image736.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image737.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Long format introduction date</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">2B</td>
+<td class="et4" width="145" height="19">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image738.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image739.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Custom cargo ageing period</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">2C</td>
+<td class="et4" width="145" height="32">B n*B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image740.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image741.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">List of always refittable cargo types</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">2D</td>
+<td class="et4" width="145" height="32">B n*B</td>
+<td class="et4" width="191" height="32">List of never refittable cargo types</td>
+</tr>
+</tbody>
+</table>
+&nbsp;
+<h1>飞机属性</h1>
+<table width="408"><colgroup> <col width="72" /> <col width="145" /> <col width="191" /> </colgroup>
+<tbody>
+<tr>
+<td class="et2" style="font-weight: bold;" width="72" height="32">属性编号</td>
+<td class="et3" style="font-weight: bold; color: #333399;" width="145" height="32"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/GRFActionsDetailed">属性字节数</a><img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image490.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image491.png" alt="" width="17" height="17" /></td>
+<td class="et2" style="font-weight: bold;" width="191" height="32">属性描述</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">8</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image492.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image493.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Sprite (FF for new graphics)</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">9</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image494.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image495.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Is helicopter? 2=no, 0=yes</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">0A</td>
+<td class="et4" width="145" height="48">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image496.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image497.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48">Is large? 0=no, 1=yes (i.e. can't safely land on small airports)</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">0B</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image498.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image499.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Cost factor，成本</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">0C</td>
+<td class="et4" width="145" height="48">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image500.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image501.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48">Speed in units of 8 mph, that is: property = (speed in mph) / 8，速度</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="64">0D</td>
+<td class="et4" width="145" height="64">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image502.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image503.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="64"><a href="#cite_note-0">Acceleration in units of 3/8 mph/tick, that is: property = (acceleration in mph/tick) * 8/3 [1]</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">0E</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image504.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image505.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Running cost factor，运营成本</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">0F</td>
+<td class="et4" width="145" height="48">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image506.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image507.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48">Primary cargo capacity (passenger or refitted cargo)，乘客、邮件容量</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">11</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image508.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image509.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Secondary cargo capacity (mail)，货物容量</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">12</td>
+<td class="et4" width="145" height="19">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image510.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image511.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Sound effect</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="64">13</td>
+<td class="et4" width="145" height="64">D<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image512.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image513.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="64"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/CargoTypes">Bit mask of cargo types available for refitting, see column 2 (Bit Value) in CargoTypes</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">14</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image514.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image515.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Callback flags bit mask, see below</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">15</td>
+<td class="et4" width="145" height="48">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image516.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image517.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48">Refit cost, using 1/32 of the default refit cost base</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="64">16</td>
+<td class="et4" width="145" height="64">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image518.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image519.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="64"><a title="" href="http://newgrf-specs.tt-wiki.net/wiki/Action0General">Retire vehicle early, this many years before the end of phase 2 (see Action0General)</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">17</td>
+<td class="et4" width="145" height="32">B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image520.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image521.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Miscellaneous vehicle flags</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">18</td>
+<td class="et4" width="145" height="32">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image522.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image523.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32"><a title="Cargo_classes_28_29" href="#Cargo_classes_28_29">Refittable cargo classes, see train prop. 28</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">19</td>
+<td class="et4" width="145" height="48">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image524.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image525.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48"><a title="Cargo_classes_28_29" href="#Cargo_classes_28_29">Non-refittable cargo classes, see train prop. 29</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="32">1A</td>
+<td class="et4" width="145" height="32">D<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image526.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image527.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="32">Long format introduction date</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">1B</td>
+<td class="et4" width="145" height="19">B*<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image528.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image529.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Sort the purchase list</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="19">1C</td>
+<td class="et4" width="145" height="19">W<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image530.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image531.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="19">Custom cargo ageing period</td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">1D</td>
+<td class="et4" width="145" height="48">B n*B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image532.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image533.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48"><a title="List_of_always_refittable_cargo_types_.282C.2C_2D.29" href="#List_of_always_refittable_cargo_types_.282C.2C_2D.29">List of always refittable cargo types, see train property 2C</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="48">1E</td>
+<td class="et4" width="145" height="48">B n*B<img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image534.png" alt="" width="17" height="17" /> <img src="file:///C:\Users\zyy\AppData\Local\Temp\ksohtml\clip_image535.png" alt="" width="17" height="17" /></td>
+<td class="et4" width="191" height="48"><a title="List_of_always_refittable_cargo_types_.282C.2C_2D.29" href="#List_of_always_refittable_cargo_types_.282C.2C_2D.29">List of never refittable cargo types, see train property 2D</a></td>
+</tr>
+<tr>
+<td class="et4" width="72" height="64">1F</td>
+<td class="et4" width="145" height="64">W</td>
+<td class="et4" width="191" height="64">Aircraft range in tiles. Distance is euclidean, a value of 0 means range is unlimited</td>
+</tr>
+</tbody>
+</table>
+&nbsp;</p>
+
+<p>&nbsp;</p>

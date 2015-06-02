@@ -1,0 +1,153 @@
+---
+layout: post
+title: kafka-storm-zookeeper实时日志分析4-部署kafka
+categories:
+- 教程
+tags:
+- kafka
+- storm
+- zookeeper
+published: true
+comments: true
+---
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析1-序" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%901-%e5%ba%8f/">kafka-storm-zookeeper实时日志分析1-序</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析2-环境准备" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%90-1/">kafka-storm-zookeeper实时日志分析2-环境准备</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析3-部署zookeeper" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%903-%e9%83%a8%e7%bd%b2zookeeper/">kafka-storm-zookeeper实时日志分析3-部署zookeeper</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析4-部署kafka" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%904-%e9%83%a8%e7%bd%b2kafka/">kafka-storm-zookeeper实时日志分析4-部署kafka</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #2ea2cc;" title="kafka-storm-zookeeper实时日志分析5-部署storm" href="http://www.itcsl.cn/2014/05/23/44/">kafka-storm-zookeeper实时日志分析5-部署storm</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析6-守护模式部署" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%906-%e5%ae%88%e6%8a%a4%e6%a8%a1%e5%bc%8f%e9%83%a8%e7%bd%b2/">kafka-storm-zookeeper实时日志分析6-守护模式部署</a></span>
+<h1>1 部署Kafka</h1>
+<h2>1.1 部署</h2>
+解压“kafka_2.9.2-0.8.1.tgz”到kafka集群中的每台主的某个目录下（如：/root/v300r003b01），解压后得到文件夹”kafka_2.9.2-0.8.1”。</p>
+
+<p>分别修改集群中每台kafka主机的kafka配置文件（/root/v300r003b01/kafka_2.9.2-0.8.1/config/server.properties），配置项修改如下：
+<table>
+<tbody>
+<tr>
+<td width="135">配置项名</td>
+<td width="174">参考值</td>
+<td width="316">说明</td>
+</tr>
+<tr>
+<td width="135">broker.id</td>
+<td width="174">104</td>
+<td width="316">每台kafka主机的唯一ID，如：104、105、106</td>
+</tr>
+<tr>
+<td width="135">host.name</td>
+<td width="174">Kafka104</td>
+<td width="316">如：Kafka104、Kafka105、Kafka106</td>
+</tr>
+<tr>
+<td width="135">log.dirs</td>
+<td width="174">/root/v300r003b01/kafka_2.9.2-0.8.1/kafka-logs</td>
+<td width="316">Kafka保存数据的目录，不要配置到/tmp目录下</td>
+</tr>
+<tr>
+<td width="135">num.partitions</td>
+<td width="174">2</td>
+<td width="316">每个主题的分片个数，配置为2即可</td>
+</tr>
+<tr>
+<td width="135">zookeeper.connect</td>
+<td width="174">zookeeper101:2181,zookeeper102:2181,zookeeper103:2181</td>
+<td width="316">Zookeeper连接串，多个zookeeper主机之间以逗号分隔，kafka需要通过zookeeper进行状态协调</td>
+</tr>
+</tbody>
+</table>
+&nbsp;
+<h2>1.2 基本操作</h2>
+<h3>1.2.1 启动kafka集群</h3>
+分别在每个kafka主机上运行如下命令：</p>
+
+<p>[root@nimbus-101 bin]# /root/v300r003b01/kafka_2.9.2-0.8.1/bin/kafka-server-start.sh /root/v300r003b01/kafka_2.9.2-0.8.1/config/server.properties</p>
+
+<p>&nbsp;
+<h3>1.2.2 创建Kafka主题</h3>
+在kafka集群中的任何一台主机运行如下命令：</p>
+
+<p>[root@nimbus-101 bin]# /root/v300r003b01/kafka_2.9.2-0.8.1/bin/kafka-topics.sh --zookeeper Zookeeper101:2181,Zookeeper102:2181,Zookeeper103:2181 --replication-factor 2 --partitions 3  --create --topic vas</p>
+
+<p>&nbsp;</p>
+
+<p>参数说明如下：
+<table>
+<tbody>
+<tr>
+<td width="208">参数名</td>
+<td width="208">参考值</td>
+<td width="208">说明</td>
+</tr>
+<tr>
+<td width="208">--zookeeper</td>
+<td width="208">Zookeeper101:2181,Zookeeper102:2181,Zookeeper103:2181</td>
+<td width="208">Zookeeper连接串，多个zookeeper主机之间以逗号分隔</td>
+</tr>
+<tr>
+<td width="208">--replication-factor</td>
+<td width="208">2</td>
+<td width="208">数据的副本个数，2个即可</td>
+</tr>
+<tr>
+<td width="208">--partitions</td>
+<td width="208">3</td>
+<td width="208">主题分片个数，3即可</td>
+</tr>
+<tr>
+<td width="208">--create --topic</td>
+<td width="208"> test_topic</td>
+<td width="208">主题名字，如vas、vod</td>
+</tr>
+</tbody>
+</table>
+&nbsp;</p>
+
+<p>&nbsp;
+<h3>1.2.3 查看Kafka集群状态</h3>
+在kafka集群中的任何一台主机运行如下命令：</p>
+
+<p>[root@nimbus-101 bin]# /root/v300r003b01/kafka_2.9.2-0.8.1/bin/kafka-topics.sh --zookeeper Zookeeper101:2181,Zookeeper102:2181,Zookeeper103:2181 --describe</p>
+
+<p>输出如下：
+<a href="http://www.itcsl.cn/wp-content/uploads/2014/05/截图00.png"><img class="alignnone size-medium wp-image-70" src="http://www.itcsl.cn/wp-content/uploads/2014/05/截图00-300x26.png" alt="截图00" width="300" height="26" /></a></p>
+
+<p>该输出为test_topic主题的细节信息。解释如下：</p>
+
+<p>红圈从左到右分别编号1，2，3，4。</p>
+
+<p>l 1号红圈说明了test_topic有3个分片，分片id为0、1、2</p>
+
+<p>l 2号红圈说明了每个分片的leader（领导）broker id，这里都为1号broker，我们配置kafka的时候配置了broker.id这个配置项指定了每个kafka broker的id。</p>
+
+<p>l 3号红圈说明了每个分片的副本个数及其所在的broker的broker id。可以看出每个分片都分别有3个副本，需要分别存放到broker id为1、2、3的主机上。</p>
+
+<p>l 4号红圈说明了该分片当前处于可用状态的broker的broker id。正常应该与3号红圈中的一致。</p>
+
+<p>&nbsp;
+<h3>1.2.4 Kafka测试工具</h3>
+Kafka集群部署好之后，在kafka的安装目录下有工具可以对kafka进行测试。</p>
+
+<p>&nbsp;</p>
+
+<p>启动kafka消息生产者发送消息</p>
+
+<p>[root@nimbus-101 bin]# /root/v300r003b01/kafka_2.9.2-0.8.1/bin/kafka-console-producer.sh --broker-list Kafka104:9092,Kafka105:9092,Kafka106:9092 --topic test_topic</p>
+
+<p>输入任何字符回车即可向kafka发送消息。</p>
+
+<p>&nbsp;</p>
+
+<p>启动kafka消息消费者接收消息</p>
+
+<p>[root@nimbus-101 bin]# /root/v300r003b01/kafka_2.9.2-0.8.1/bin/kafka-console-consumer.sh --zookeeper Zookeeper101:2181,Zookeeper102:2181,Zookeeper103:2181 --from-beginning --topic test_topic</p>
+
+<p>发送到test_topic的消息将会显示到界面上。如果业务系统也是向这个主题发送数据，该工具也可以接收到。
+<h3>1.2.5 停止Kafka</h3>
+请直接使用kill命令杀掉进程。</p>
+
+<p>&nbsp;</p>

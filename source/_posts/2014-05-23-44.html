@@ -1,0 +1,346 @@
+---
+layout: post
+title: kafka-storm-zookeeper实时日志分析5-部署storm
+categories:
+- 教程
+tags:
+- kafka
+- storm
+- zookeeper
+published: true
+comments: true
+---
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析1-序" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%901-%e5%ba%8f/">kafka-storm-zookeeper实时日志分析1-序</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析2-环境准备" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%90-1/">kafka-storm-zookeeper实时日志分析2-环境准备</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析3-部署zookeeper" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%903-%e9%83%a8%e7%bd%b2zookeeper/">kafka-storm-zookeeper实时日志分析3-部署zookeeper</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析4-部署kafka" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%904-%e9%83%a8%e7%bd%b2kafka/">kafka-storm-zookeeper实时日志分析4-部署kafka</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #2ea2cc;" title="kafka-storm-zookeeper实时日志分析5-部署storm" href="http://www.itcsl.cn/2014/05/23/44/">kafka-storm-zookeeper实时日志分析5-部署storm</a></span></p>
+
+<p><span style="font-weight: 600; color: #555555;"><a class="row-title" style="color: #0074a2;" title="kafka-storm-zookeeper实时日志分析6-守护模式部署" href="http://www.itcsl.cn/2014/05/23/kafka-storm-zookeeper%e5%ae%9e%e6%97%b6%e6%97%a5%e5%bf%97%e5%88%86%e6%9e%906-%e5%ae%88%e6%8a%a4%e6%a8%a1%e5%bc%8f%e9%83%a8%e7%bd%b2/">kafka-storm-zookeeper实时日志分析6-守护模式部署</a></span>
+<h1>1 部署storm</h1>
+<h2>1.1 部署</h2>
+解压“apache-storm-0.9.1-incubating.tar.gz”到Storm集群中的每台主的某个目录下（如：/root/v300r003b01），解压后得到文件夹”apache-storm-0.9.1-incubating”。</p>
+
+<p>分别修改集群中每台Storm主机的配置文件（/root/v300r003b01/apache-storm-0.9.1-incubating/conf/storm.yaml），配置项修改如下：
+<pre># Licensed to the Apache Software Foundation (ASF) under one</pre></p>
+
+<p># or more contributor license agreements.  See the NOTICE file</p>
+
+<p># distributed with this work for additional information</p>
+
+<p># regarding copyright ownership.  The ASF licenses this file</p>
+
+<p># to you under the Apache License, Version 2.0 (the</p>
+
+<p># "License"); you may not use this file except in compliance</p>
+
+<p># with the License.  You may obtain a copy of the License at</p>
+
+<p>#</p>
+
+<p># http://www.apache.org/licenses/LICENSE-2.0</p>
+
+<p>#</p>
+
+<p># Unless required by applicable law or agreed to in writing, software</p>
+
+<p># distributed under the License is distributed on an "AS IS" BASIS,</p>
+
+<p># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</p>
+
+<p># See the License for the specific language governing permissions and</p>
+
+<p># limitations under the License.</p>
+
+<p>########### These MUST be filled in for a storm configuration</p>
+
+<p>storm.zookeeper.servers:</p>
+
+<p>- "Zookeeper101"</p>
+
+<p>- "Zookeeper102"</p>
+
+<p>- "Zookeeper103"</p>
+
+<p>storm.local.dir: "/root/v300r003b01/apache-storm-0.9.1-incubating/local"</p>
+
+<p>#</p>
+
+<p>nimbus.host: "Storm107"</p>
+
+<p>#</p>
+
+<p>#</p>
+
+<p># ##### These may optionally be filled in:</p>
+
+<p>#</p>
+
+<p>## List of custom serializations</p>
+
+<p># topology.kryo.register:</p>
+
+<p>#     - org.mycompany.MyType</p>
+
+<p>#     - org.mycompany.MyType2: org.mycompany.MyType2Serializer</p>
+
+<p>#</p>
+
+<p>## List of custom kryo decorators</p>
+
+<p># topology.kryo.decorators:</p>
+
+<p>#     - org.mycompany.MyDecorator</p>
+
+<p>#</p>
+
+<p>## Locations of the drpc servers</p>
+
+<p># drpc.servers:</p>
+
+<p>#     - "server1"</p>
+
+<p>#     - "server2"</p>
+
+<p>## Metrics Consumers</p>
+
+<p># topology.metrics.consumer.register:</p>
+
+<p>#   - class: "backtype.storm.metrics.LoggingMetricsConsumer"</p>
+
+<p>#     parallelism.hint: 1</p>
+
+<p>#   - class: "org.mycompany.MyMetricsConsumer"</p>
+
+<p>#     parallelism.hint: 1</p>
+
+<p>#     argument:</p>
+
+<p>#       - endpoint: "metrics-collector.mycompany.org"</p>
+
+<p>storm.messaging.transport: "backtype.storm.messaging.netty.Context"</p>
+
+<p>storm.messaging.netty.server_worker_threads: 1</p>
+
+<p>storm.messaging.netty.client_worker_threads: 1</p>
+
+<p>storm.messaging.netty.max_retries: 1000</p>
+
+<p>storm.messaging.netty.max_wait_ms: 1000</p>
+
+<p>storm.messaging.netty.min_wait_ms: 100</p>
+
+<p>supervisor.slots.ports:</p>
+
+<p>- 6700</p>
+
+<p>- 6701</p>
+
+<p>- 6702</p>
+
+<p>- 6703
+
+&nbsp;</p>
+
+<p>storm.zookeeper.servers:配置zookeeper连接串，storm需要zookeeper协调集群状态。</p>
+
+<p>storm.local.dir: 配置storm的数据保存目录，没有就创建一个，注意不要配置为/tmp目录。</p>
+
+<p>nimbus.host:配置storm集群的主机，该主机负责提交实时统计代码及实时计算任务的分配。</p>
+
+<p>supervisor.slots.ports:配置该主机可以启动多少个worker。Worker越多，实时运算集群给该主机分配的任务越多，一般配置为cpu核的个数即可。数字为worker的端口号。</p>
+
+<p>&nbsp;
+<h2>1.2 基本操作</h2>
+<h3>1.2.1 启动storm的nimbus进程</h3>
+在nimbus主机上（Storm107）运行如下命令，启动nimbus：</p>
+
+<p>[root@nimbus-101 bin]#/root/v300r003b01/apache-storm-0.9.1-incubating/bin/storm nimbus
+<h3>1.2.2 启动storm的ui进程</h3>
+在nimbus主机上（Storm107）运行如下命令，启动nimbus：</p>
+
+<p>[root@nimbus-101 bin]#/root/v300r003b01/apache-storm-0.9.1-incubating/bin/storm ui
+<h3>1.2.3 启动storm的supervisor进程</h3>
+在nimbus主机上（Storm107）运行如下命令，启动nimbus：</p>
+
+<p>[root@nimbus-101 bin]#/root/v300r003b01/apache-storm-0.9.1-incubating/bin/storm supervisor</p>
+
+<p>&nbsp;
+<h3>1.2.4 提交实时统计代码到storm集群</h3>
+向配置人员获取adp_topology-1.0-jar-with-dependencies.jar实时统计软件包，上传到nimbus进程所在主机上，使用如下命令提交实时统计代码：
+<pre>[root@nimbus-101 bin]#/root/v300r003b01/apache-storm-0.9.1-incubating/bin/storm jar  /root/adp_topology-1.0-jar-with-dependencies.jar statistic.topology.StatisticTopology my_topology Zookeeper101:2181,Zookeeper102:2181,Zookeeper103:2181 172.16.135.210 root coship vas_topic vod_topic remote
+</pre>
+&nbsp;</p>
+
+<p>上面空格分开的蓝色部分需要根据情况进行修改，解释如下：</p>
+
+<p>l /root/adp_topology-1.0-jar-with-dependencies.jar：请配置对路径</p>
+
+<p>l my_topology：本次提交的实时统计包名字，一般保持一致</p>
+
+<p>l Zookeeper101:2181,Zookeeper102:2181,Zookeeper103:2181：zookeeper连接串，实时统计代码需要zookeeper维护状态信息。</p>
+
+<p>l 172.16.135.210：OAS数据库主机IP</p>
+
+<p>l Root：OAS数据库用户名</p>
+
+<p>l Coship:OAS数据库密码</p>
+
+<p>l vas_topic：vas点击/浏览业务日志存放的主题名称</p>
+
+<p>l vod_topic：vod点击/浏览业务日志存放的主题名称</p>
+
+<p>l Remote：以分布式运行模式提交，如果是local则以本机运行模式提交。仅供测试时使用
+<h3>1.2.5 查看storm集群状态</h3>
+浏览器打开storm ui所在的服务器（http://192.168.1.107:8080），显示storm集群及实时统计代码的运行状态。如下：</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>图中蓝色圈从上到下分别编号为1、2、3。</p>
+
+<p><b>1号圈解释</b>
+<table>
+<tbody>
+<tr>
+<td width="208">字段名</td>
+<td width="417">说明</td>
+</tr>
+<tr>
+<td width="208">version</td>
+<td width="417">Storm的版本</td>
+</tr>
+<tr>
+<td width="208">Nimbus uptime</td>
+<td width="417">集群上线运行时间</td>
+</tr>
+<tr>
+<td width="208">supervisors</td>
+<td width="417">集群中supervisor进程的个数，我们使用..../storm spervisor启动的。</td>
+</tr>
+<tr>
+<td width="208">Used slots</td>
+<td width="417">集群中被使用的slots个数。</td>
+</tr>
+<tr>
+<td width="208">Free slots</td>
+<td width="417">集群中空闲的slots个数</td>
+</tr>
+<tr>
+<td width="208">Total slots</td>
+<td width="417">集群中总的slots个数，我们在storm.yaml文件的supervisor.slots.ports配置项指定了每一台的slots个数。</td>
+</tr>
+<tr>
+<td width="208">executors</td>
+<td width="417">这个可以说是线程数，可以不管</td>
+</tr>
+</tbody>
+</table>
+&nbsp;</p>
+
+<p>可见1号圈主要描述的整个storm集群的状态。</p>
+
+<p><b>2号圈解释</b>
+<table>
+<tbody>
+<tr>
+<td width="208">字段名</td>
+<td width="417">说明</td>
+</tr>
+<tr>
+<td width="208">name</td>
+<td width="417">实时统计拓扑的名字，我们的实时统计拓扑会有两个，vod和vas的。</td>
+</tr>
+<tr>
+<td width="208">id</td>
+<td width="417">实时统计拓扑的storm内部Id</td>
+</tr>
+<tr>
+<td width="208">status</td>
+<td width="417">实时统计拓扑的状态，正常应该是Active</td>
+</tr>
+<tr>
+<td width="208">uptime</td>
+<td width="417">实时统计拓扑的上线运行时间。</td>
+</tr>
+<tr>
+<td width="208">Num works</td>
+<td width="417">实时统计拓扑使用的works个数，可以认为works个数与slots个数相等</td>
+</tr>
+<tr>
+<td width="208">Num executors</td>
+<td width="417">实时统计拓扑使用的线程数</td>
+</tr>
+<tr>
+<td width="208"></td>
+<td width="417"></td>
+</tr>
+</tbody>
+</table>
+&nbsp;</p>
+
+<p>可见2号圈主要描述了storm集群中运行的拓扑的状态，一个集群可以运行多个拓扑，除了vod、vas实时统计拓扑以外，如果需要，也可以运行其它的拓扑。</p>
+
+<p>&nbsp;</p>
+
+<p><b>3号圈解释</b>
+<table>
+<tbody>
+<tr>
+<td width="208">字段名</td>
+<td width="417">说明</td>
+</tr>
+<tr>
+<td width="208">id</td>
+<td width="417">实时统计拓扑的名字，我们的实时统计拓扑会有两个，vod和vas的。</td>
+</tr>
+<tr>
+<td width="208">Host</td>
+<td width="417">实时统计拓扑的storm内部Id</td>
+</tr>
+<tr>
+<td width="208">status</td>
+<td width="417">实时统计拓扑的状态，正常应该是Active</td>
+</tr>
+<tr>
+<td width="208">uptime</td>
+<td width="417">实时统计拓扑的上线运行时间。</td>
+</tr>
+<tr>
+<td width="208">Num works</td>
+<td width="417">实时统计拓扑使用的works个数，可以认为works个数与slots个数相等</td>
+</tr>
+<tr>
+<td width="208">Num executors</td>
+<td width="417">实时统计拓扑使用的线程数</td>
+</tr>
+<tr>
+<td width="208"></td>
+<td width="417"></td>
+</tr>
+</tbody>
+</table>
+&nbsp;</p>
+
+<p>可见2号圈主要描述了storm集群中运行的拓扑的状态，一个集群可以运行多个拓扑，除了vod、vas实时统计拓扑以外，如果需要，也可以运行其它的拓扑。</p>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;
+<h3>1.2.6 停止实时统计代码的执行</h3>
+如果要停止某个拓扑的执行，可以执行如下命令：</p>
+
+<p>[root@nimbus-101 bin]#/root/v300r003b01/apache-storm-0.9.1-incubating/bin/storm kill my_topology_vas</p>
+
+<p>my_topology_vas：要停止的拓扑的名字，参考storm ui页面中看到的拓扑名称。</p>
+
+<p>&nbsp;
+<h3>1.2.7 停止storm进程</h3>
+直接使用kill命令结束进程即可。</p>
+
+<p>&nbsp;</p>

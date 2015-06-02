@@ -1,0 +1,135 @@
+---
+layout: post
+title: 如何配置全局代理
+categories:
+- linux使用
+- 代理
+- 技术
+- 教程
+tags:
+- linux，linux教程，linux操作系统
+- 代理
+published: true
+comments: true
+---
+<p><h1><b>如何配置全局代理</b></h1>
+<h1><b>Windows下</b></h1>
+使用 Proxifier  或   ProxyCap，都需要注册。 前者比较好用，可控规则较多。
+<h1><b>Linux下</b></h1>
+使用proxychains、redsocks、tsocks，都是免费工具。proxychain功能较多，支持多个代理轮询等；redsocks据说支持android；tsocks配置简单。推荐使用tsocks。我正在使用。
+<h1><b>tsocks使用教程</b></h1>
+通过tsocks，可以让linux中不支持配置代理的软件使用我们的代理服务器上网。譬如你有一个socks5代理服务器，可以通过这个代理上网，但是linux的某些软件不支持配置代理，这个就是tsocks的用武之地了。tsocks可以把不支持配置代理的软件的网络请求进行转发，转发到我们的socks5代理服务器。</p>
+
+<p>tsocks官方网站：<a href="http://tsocks.sourceforge.net/about.php">http://tsocks.sourceforge.net/about.php</a></p>
+
+<p>我的操作系统环境为centos5.9 ，如果你是centos6的版本，可以直接下载编译好的二进制rpm包进行安装。</p>
+
+<p>我使用的tsocks版本为：tsocks-1.8beta5.tar.gz
+<h2><b>安装tsocks</b></h2>
+首先到官方网站下载tsocks-1.8beta5.tar.gz源代码包。</p>
+
+<p>解压：tar -xzf  tsocks-1.8beta5.tar.gz，生成tsocks-1.8目录。</p>
+
+<p>编译源代码需要gcc环境，如果没有请使用yum install gcc进行安装。</p>
+
+<p>进入tsocks-1.8目录，输入：</p>
+
+<p>./configure</p>
+
+<p>make</p>
+
+<p>make install</p>
+
+<p>这个时候你运行tsocks，可能会报一个错误说找不到/usr/lib/libtsocks.so。可以从tsocks-1.8目录中找到该文件，拷贝到/usr/lib/</p>
+
+<p><b>配置tsocks</b></p>
+
+<p>输入如下命令编辑tsocks配置文件，我的配置如下，注意蓝色部分，我使用的socks5代理,地址是192.168.110.2,端口为1080。</p>
+
+<p>vi /etc/tsocks.conf
+<blockquote># Local networks</blockquote></p>
+
+<p># For this example this machine can directly access 192.168.0.0/255.255.255.0</p>
+
+<p># (192.168.0.*) and 10.0.0.0/255.0.0.0 (10.*)</p>
+
+<p>&nbsp;</p>
+
+<p><span style="color: #0000ff;">local = 192.168.110.0/255.255.255.0</span></p>
+
+<p><span style="color: #0000ff;">#local = 10.0.0.0/255.0.0.0</span></p>
+
+<p>&nbsp;</p>
+
+<p># Paths</p>
+
+<p># For this example this machine needs to access 150.0.0.0/255.255.0.0 as</p>
+
+<p># well as port 80 on the network 150.1.0.0/255.255.0.0 through</p>
+
+<p># the socks 5 server at 10.1.7.25 (if this machines hostname was</p>
+
+<p># "socks.hello.com" we could also specify that, unless --disable-hostnames</p>
+
+<p># was specified to ./configure).</p>
+
+<p>&nbsp;</p>
+
+<p><span style="color: #0000ff;">#path {</span></p>
+
+<p><span style="color: #0000ff;">#       reaches = 150.0.0.0/255.255.0.0</span></p>
+
+<p><span style="color: #0000ff;">#       reaches = 150.1.0.0:80/255.255.0.0</span></p>
+
+<p><span style="color: #0000ff;">#       server = 10.1.7.25</span></p>
+
+<p><span style="color: #0000ff;">#       server_type = 5</span></p>
+
+<p><span style="color: #0000ff;">#       default_user = delius</span></p>
+
+<p><span style="color: #0000ff;">#       default_pass = hello</span></p>
+
+<p><span style="color: #0000ff;">#}</span></p>
+
+<p>&nbsp;</p>
+
+<p># Default server</p>
+
+<p># For connections that aren't to the local subnets or to 150.0.0.0/255.255.0.0</p>
+
+<p># the server at 192.168.0.1 should be used (again, hostnames could be used</p>
+
+<p># too, see note above)</p>
+
+<p>&nbsp;</p>
+
+<p><span style="color: #0000ff;">server = 192.168.110.2</span></p>
+
+<p><span style="color: #0000ff;"># Server type defaults to 4 so we need to specify it as 5 for this one</span></p>
+
+<p><span style="color: #0000ff;">server_type = 5</span></p>
+
+<p><span style="color: #0000ff;"># The port defaults to 1080 but I've stated it here for clarity</span></p>
+
+<p><span style="color: #0000ff;">server_port = 1080</span></p>
+
+<p>&nbsp;
+<b>注意点</b></p>
+
+<p>有可能你需要进行dns配置，不然解析不了域名，我就在这里卡了很久。配置dns的方法如下：</p>
+
+<p>vi /etc/resolv.conf</p>
+
+<p>增加：</p>
+
+<p>nameserver 192.168.110.2</p>
+
+<p>&nbsp;</p>
+
+<p><b>使用</b><b>tsocks</b></p>
+
+<p>在命令之前加上tsocks即可，如：</p>
+
+<p>tsocks  yum  install  xxx</p>
+
+<p>tsocks  wget  xxxxx</p>
