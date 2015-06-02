@@ -1,6 +1,6 @@
 markdown: rdiscount
 permalink: /:title/
-url: /
+url: /NET
 name: itcsl.cn
 author: zouyongyuan
 qq: 93436982
@@ -10,7 +10,7 @@ beian:
 cnzz: 
 weibo: zouyongyuan@163.com
 github: zouyongyuan
-pygments: true
+highlighter: 'pygments'
 safe: true
 paginate: 100
 about: "这里是 zouyongyuan 的个人博客，创建于 2014 年。这里包含了部分个人的学习心得、“折腾”过程、结论和成果，切换到分类模可以更快地找到感兴趣的内容，欢迎观赏、建议、拍砖……"
