@@ -1,6 +1,6 @@
 markdown: rdiscount
 permalink: /:title/
-url: /NET
+url: http://itcsl.cn
 name: itcsl.cn
 author: zouyongyuan
 qq: 93436982
@@ -9,7 +9,7 @@ duoshuo: noset
 beian: 
 cnzz: 
 weibo: zouyongyuan@163.com
-github: zouyongyuan
+github: meiavy@163.com
 highlighter: 'pygments'
 safe: true
 paginate: 100
