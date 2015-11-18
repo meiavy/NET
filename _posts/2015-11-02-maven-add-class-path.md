@@ -9,27 +9,27 @@ tags: maven classpath
 
 # Maven项目中可以按如下方法增加classpath
 
-<plugin>
-	<groupId>org.apache.maven.plugins</groupId>
-	<artifactId>maven-jar-plugin</artifactId>
-	<version>2.4</version>
-	<configuration>
-		<archive>
-			<index>false</index>
-			<manifest>
-				<classpathPrefix>lib/</classpathPrefix>
-				<addClasspath>true</addClasspath>
-				<mainClass>longtv.App</mainClass>
-			</manifest>
 
-##			<manifestEntries>
-##				<Built-By>Me</Built-By>
-##				<Class-Path>.</Class-Path>
-##			</manifestEntries>
+``` xml
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<archive>
+							<index>false</index>
+							<manifest>
+								<classpathPrefix>lib/</classpathPrefix>
+								<addClasspath>true</addClasspath>
+								<mainClass>longtv.App</mainClass>
+							</manifest>
 
-		</archive>
-	</configuration>
-</plugin>
+				      <manifestEntries>
+				        <Built-By>Me</Built-By>
+				        <Class-Path>.</Class-Path>
+				      </manifestEntries>
 
-
-
+						</archive>
+					</configuration>
+				</plugin>
+``` xml
